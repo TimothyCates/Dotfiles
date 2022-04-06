@@ -5,17 +5,26 @@
     setxkbmap -v us
     sxhkd &
 ## Display
-	~/.screenlayout/display.sh
 	picom --experimental-backends -f &
-	nitrogen --set-zoom-fill --random --head=0 $HOME/Pictures/Wallpapers
-	nitrogen --set-zoom-fill --random --head=1 $HOME/Pictures/Wallpapers
 
 ## Cursor
 	xsetroot -cursor_name left_ptr
 
 ## Monitor setup
-	bspc monitor DP-5 -d  1 2 3 4
-	bspc monitor HDMI-0 -d 5 6 7 8
+    xoutput=$(xrandr | grep ' connected' | cut -d' ' -f1)
+    readarray -t displays <<< "$xoutput"
+    startIndex=1
+    for index in "${!displays[@]}"
+    do
+        bspc monitor ${displays[index]} -d  $startIndex $((startIndex+1)) $((startIndex+2)) $((startIndex+3))
+        ((startIndex=startIndex+4))
+    done
+
+## Wallpaper setup
+    for index in "${!displays[@]}"
+    do
+        nitrogen --set-zoom-fill --random --head=$index $HOME/Pictures/Wallpapers
+    done
 
 ## Polybar
     ~/.config/polybar/launch.sh &
