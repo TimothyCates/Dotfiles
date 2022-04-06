@@ -4,7 +4,7 @@ hwclock --systohc
 
 # Set Locale to us english and japanese
 sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
-sed -i '/ja_JP.UTF-8 UTF-8/s/^#//g' /etc/locale/gen
+sed -i '/ja_JP.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
 locale-gen
 
 # Setup keymap
@@ -27,7 +27,7 @@ passwd
 # Setup a admin user
 echo "Input an admin username:"
 read adminuser
-useradd -m -g users -G libvirt/wheel $adminuser
+useradd -m -g users -G libvirt,wheel $adminuser
 echo "Input a password for $adminuser"
 passwd $adminuser
 
