@@ -8,7 +8,7 @@ yay -Y --devel --save
 
 # Update our Mirrors
 yay -S reflector
-reflector --latest 200 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --latest 50 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 yay -Syy
 
 # Install Nvidia
@@ -54,7 +54,6 @@ sudo systemctl enable avahi-daemon
 sudo systemctl enable tlp
 sudo systemctl enable reflector.timer
 sudo systemctl enable libvirtd
-sudo systemctl enable acpid
 
 # Done
 echo "Done! Type exit, umount -a and reboot."
