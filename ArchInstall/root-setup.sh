@@ -32,7 +32,7 @@ echo "Input a password for $adminuser"
 passwd $adminuser
 
 # Edit sudoers file
-sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
+sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL:ALL)\s\+ALL\)/\1/' /etc/sudoers
 
 # Install bootloader
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck --removable
