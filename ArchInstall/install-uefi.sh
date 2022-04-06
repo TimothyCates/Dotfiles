@@ -14,8 +14,11 @@ pacstrap /mnt base linux linux-headers linux-firmware sof-firmware base-devel
 # Install microcode updates
 pacstrap /mnt intel-ucode
 
+# Install libvirt so user can inherit libvirt group
+pacstrap /mnt virt-install 
+
 # My preffered extras
-pacstrap /mnt grub efibootmgr nvim networkmanager zsh 
+pacstrap /mnt grub efibootmgr neovim networkmanager zsh 
 
 genfstab -U /mnt >> /mnt/etc/fstab
 

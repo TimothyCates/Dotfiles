@@ -33,7 +33,7 @@ yay -S alsa-utils arandr avahi bluez bluez-libs bluez-utils bridge-utils ca-cert
 yay -S alacritty discord obs-studio ranger vivaldi vivalid-ffmpeg-codecs scrot pfetch tty-clock-git
 
 ## Virtual machines
-yay -S qemu qemu-arch-extra virt-install virt-manager
+yay -S qemu qemu-arch-extra virt-manager
 
 ## Printers
 yay -S hplip 

@@ -5,7 +5,7 @@ hwclock --systohc
 # Set Locale to us english and japanese
 sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
 sed -i '/ja_JP.UTF-8 UTF-8/s/^#//g' /etc/locale/gen
-local-gen
+locale-gen
 
 # Setup keymap
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
