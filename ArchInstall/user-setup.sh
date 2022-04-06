@@ -1,6 +1,6 @@
 # Get yay
 cd ~
-pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 yay -Y --gendb
 yay -Syu --devel
@@ -47,14 +47,14 @@ cd ~
 sudo rm -r yay nerd-fonts
 
 # Enable services
-systemctl enable bluetooth 
-systemctl enable cups.service
-systemctl enable sshd
-systemctl enable avahi-daemon
-systemctl enable tlp
-systemctl enable reflector.timer
-systemctl enable libvirtd
-systemctl enable acpid
+sudo systemctl enable bluetooth 
+sudo systemctl enable cups.service
+sudo systemctl enable sshd
+sudo systemctl enable avahi-daemon
+sudo systemctl enable tlp
+sudo systemctl enable reflector.timer
+sudo systemctl enable libvirtd
+sudo systemctl enable acpid
 
 # Done
 echo "Done! Type exit, umount -a and reboot."
