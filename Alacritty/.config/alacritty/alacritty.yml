@@ -1,0 +1,77 @@
+##########################################
+#Color Themes
+##########################################
+schemes:
+  ## Based on tokyodark.nvim https://github.com/tiagovla/tokyodark.nvim
+  tokyo-night: &tokyo-dark
+    # Default colors
+    primary:
+      background: '0x11121D'
+      foreground: '0xA0A8CD'
+
+    # Normal colors
+    normal:
+      black:   '0x06080A'
+      red:     '0xEE6D85'
+      green:   '0x95C561'
+      yellow:  '0xD7A65F'
+      blue:    '0x7199EE'
+      magenta: '0xA485DD'
+      cyan:    '0x38A89D'
+      white:   '0x787c99'
+    # Bright colors
+    bright:
+      black:   '0x06080A'
+      red:     '0xEE6D85'
+      green:   '0x95C561'
+      yellow:  '0xD7A65F'
+      blue:    '0x7199EE'
+      magenta: '0xA485DD'
+      cyan:    '0x38A89D'
+      white:   '0xacb0d0'
+##########################################
+#Configuration
+##########################################
+symbol_map: U+f101-U+f208 nonicons
+env:
+  TERM: alacritty
+
+window:
+  opacity: 1
+  padding: 
+    x: 10
+    y: 0
+  dyanmic_title: true
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+font:
+  normal:
+    family: DejavuSansMono Nerd Font
+  bold:
+    family: DejavuSansMono Nerd Font
+  italic:
+    family: DejavuSansMono Nerd Font
+  bold_italic:
+    family: DejavuSansMono Nerd Font
+  size: 12
+  offset:
+    x: 1
+    y: 2
+
+colors: *tokyo-dark
+
+selection:
+  save_to_clipbourd: true
+
+cursor:
+  style:
+    shape: Underline
+    blinking: Always
+  vi_mode_style: Underline
+  blink_interval: 500
+  unfocused_hollow: false
+
+live_config_reload: true
