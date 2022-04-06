@@ -3,7 +3,7 @@
 # Turn ntp on
 timedatectl set-ntp true
 
-# Initate pacman keyring
+# Refresh keys, takes time remove if short on time
 pacman-key --init
 pacman-key --populate archlinux
 pacman-key --refresh-keys
