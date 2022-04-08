@@ -41,11 +41,21 @@ return packer.startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim'               -- Formatters using LSP
     
     -- Completion
-    use 'ms-jpq/coq_nvim'                               -- Fast Completion Engine
-    use 'ms-jpq/coq.thirdparty'                         -- Third Party Sources for Coq
+    use "hrsh7th/nvim-cmp"                              -- Completion Engine
+    use "hrsh7th/cmp-buffer"                            -- Completions from Buffers
+    use "hrsh7th/cmp-path"                              -- Path-based Completions
+    use "david-kunz/cmp-npm"                           -- NPM Completions
+    use "andersevenrud/cmp-tmux"                        -- Completions from tmux panes
+    use "hrsh7th/cmp-nvim-lua"                          -- Completions for nvim lua API
+    use "hrsh7th/cmp-nvim-lsp"                          -- Completions From Builtin LSP
+    use "saadparwaiz1/cmp_luasnip"                      -- Completions From Snippets
+    -- Completion Modifier
+    use "lukas-reineke/cmp-under-comparator"            -- Sort underline competions to bottom
+    use "hrsh7th/cmp-cmdline"                           -- Vim Cmd-line Completions
     
     --Snippets
-    use 'ms-jpq/coq.artifacts'                          -- Snippets for Coq
+    use "l3mon4d3/LuaSnip"                              -- Snippet Engine
+    use "rafamadriz/friendly-snippets"                  -- Tons of snippets
 
     -- Visual Enchancments
     use 'folke/todo-comments.nvim'                      -- Color Todo Comments
