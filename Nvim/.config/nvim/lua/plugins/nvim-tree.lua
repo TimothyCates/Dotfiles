@@ -3,6 +3,11 @@ if not ok then
     return
 end
 
+-- This is designed to make nvim-tree close when it is the last window
+vim.cmd[[
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]]
+
 tree.setup{
     auto_reload_on_write = true,
     disable_netrw = false,
@@ -11,7 +16,7 @@ tree.setup{
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
     ignore_buffer_on_setup = false,
-    open_on_setup = false,
+    open_on_setup = true,
     open_on_tab = true,
     sort_by = "name",
     update_cwd = true,
@@ -29,7 +34,7 @@ tree.setup{
         auto_open = true,
     },
     update_focused_file = {
-        enable = false,
+        enable = true,
         update_cwd = false,
         ignore_list = {},
     },
@@ -65,7 +70,7 @@ tree.setup{
         },
         open_file = {
             quit_on_open = false,
-            resize_window = false,
+            resize_window = true,
             window_picker = {
                 enable = true,
                 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
@@ -92,3 +97,4 @@ tree.setup{
         },
     },
 }
+
