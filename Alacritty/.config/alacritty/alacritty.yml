@@ -34,7 +34,7 @@ schemes:
 ##########################################
 symbol_map: U+f101-U+f208 nonicons
 env:
-  TERM: alacritty
+  TERM: xterm-256color
 
 window:
   opacity: 1
