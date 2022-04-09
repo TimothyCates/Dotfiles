@@ -46,6 +46,7 @@ keymap('v', '<', '<gv', opts)
 
 -- Tab also indents
 keymap('v', '<TAB>', '>gv', opts)
+keymap('v', '<S-TAB>', '<gv', opts)
 
 -- Pasting over selection doesnt copy selected text
 keymap('v', 'p', '"_dP', opts)
