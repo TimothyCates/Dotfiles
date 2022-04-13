@@ -58,6 +58,8 @@ super + {_,shift + }c
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
+Print
+    scrot -f -s -p -q 100 -e 'mv \$f ~/Pictures/%b-%-d-%Y-%-I%M%p.png' 
 # focus the last node/desktop
 super + {grave,Tab}
 	bspc {node,desktop} -f last
