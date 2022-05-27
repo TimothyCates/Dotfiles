@@ -36,9 +36,6 @@ keymap('n', '<C-s>', ':w<CR>', opts)
 
 
 -- INSERT---------------------------------------------------
--- Spam j and k to exit insert mode
-keymap('i', 'jk', '<ESC>', opts)
-keymap('i', 'kj', '<ESC>', opts)
 
 -- VISUAL---------------------------------------------------
 -- Indent keeps slections
