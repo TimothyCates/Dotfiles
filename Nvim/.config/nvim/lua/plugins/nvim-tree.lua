@@ -11,7 +11,6 @@ autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tab
 tree.setup{
     auto_reload_on_write = true,
     disable_netrw = false,
-    hide_root_folder = false,
     hijack_cursor = false,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
@@ -23,8 +22,8 @@ tree.setup{
     view = {
         width = 30,
         height = 30,
-        side = "left",
-        preserve_window_proportions = false,
+        side = "right",
+        preserve_window_proportions = true,
         number = false,
         relativenumber = false,
         signcolumn = "yes",

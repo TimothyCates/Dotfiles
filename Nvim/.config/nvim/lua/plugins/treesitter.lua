@@ -3,7 +3,6 @@ if not ok then
     return
 end
 configs.setup {
-    ensure_installed = "maintained",
     sync_install = false,
     ignore_install = {""},
     highlight = {
