@@ -26,9 +26,10 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 -- Buffer Movement
 keymap('n', '<S-h>', ':BufferLineCyclePrev<cr>', opts)
 keymap('n', '<S-l>', ':BufferLineCycleNext<cr>', opts)
+keymap('n', '<S-x>', ':Bdelete<cr>',opts)
 
 -- Toggle Nvim-tree
-keymap('n', '<Leader>f', ':NvimTreeToggle<cr>', opts)
+keymap('n', '<Leader><Leader>', ':NvimTreeToggle<cr>', opts)
 
 -- Ctrl S to save file
 keymap('n', '<C-s>', ':w<CR>', opts)
