@@ -1,6 +1,7 @@
 require 'general.options'
 require 'general.plugins'
 require 'general.keymaps'
+require 'general.statusline'
 require 'plugins'
 require 'lsp'
 require 'general.colorscheme'

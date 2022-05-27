@@ -10,7 +10,7 @@ options.hidden = true
 
 -- Search/Command Settings
 options.ignorecase = true
-options.hlsearch = true
+options.hlsearch = false
 options.cmdheight = 2
 
 -- User Experience settings
@@ -36,7 +36,6 @@ options.number = true
 options.scrolloff = 8
 options.updatetime = 300
 options.timeoutlen = 300
-options.laststatus = 0
 options.conceallevel = 0
 options.synmaxcol = 500
 options.signcolumn = "yes"
