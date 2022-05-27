@@ -52,23 +52,29 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'FocusGained' }, {
 -----------------------------------------------------------------
 
 local function status_line()
-  local mode = "%-5{%v:lua.string.upper(v:lua.vim.fn.mode())%}"
-  local file_name = "%-.16t"
-  local file_type = " %y"
-  local right_align = "%="
-  local pct_thru_file = "%5p%%"
+    local file_name = "%-.16t"
+    local file_type = " %y"
+    local right_align = "%="
+    local spacer = "  "
+    local pct_thru_file = "%5p%%"
+    local gitbranch = '%#PmenuSel#%{get(b:, "branch_name", "")}%#LineNr#'
+    local lsp_errors = '%{get(b:, "errors", "")}'
+    local current_time = '%{strftime("%H:%M")}'
 
-  return table.concat{
-    '%#PmenuSel#%{get(b:, "branch_name", "")}%#LineNr#',
-    "  ",
-    file_name,
-    file_type,
-    right_align,
-    '%{get(b:, "errors", "")}',
-    pct_thru_file
-  }
+    return table.concat{
+        gitbranch,
+        spacer,
+        file_name,
+        file_type,
+        right_align,
+        lsp_errors,
+        pct_thru_file,
+        spacer,
+        current_time
+    }
 end
+-- Update statusline every second for clock
+vim.cmd [[call timer_start(1000, {-> execute(':let &stl=&stl')}, {'repeat': -1})]]
 
 options.laststatus = 3
 options.statusline = status_line()
---options.statusline = [[%#PmenuSel#%{get(b:, "branch_name", "")}%#LineNr# %f %m %= %#CursorColumn# %{get(b:, "errors", "")} %{get(b:, "wordcount", "")} %y %{&fileencoding?&fileencoding:&encoding} [%{&fileformat}] %p%% %l:%c]]
