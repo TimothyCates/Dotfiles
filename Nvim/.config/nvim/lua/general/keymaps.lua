@@ -34,6 +34,18 @@ keymap('n', '<Leader><Leader>', ':NvimTreeToggle<cr>', opts)
 -- Ctrl S to save file
 keymap('n', '<C-s>', ':w<CR>', opts)
 
+-- Center on movement, I hate being on the bottom of the window
+keymap('n', 'j', 'jzz', opts)
+keymap('n', 'k', 'kzz', opts)
+
+-- Center when jumping to results
+keymap('n', 'n', 'nzz', opts)
+keymap('n', 'N', 'Nzz', opts)
+keymap('n', '<C-o>', '<C-o>zz', opts)
+keymap('n', '<C-i>', '<C-i>zz', opts)
+
+-- -- One line to center the first result when searching for/back
+vim.api.nvim_exec([[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>']], false)
 
 -- INSERT---------------------------------------------------
 
