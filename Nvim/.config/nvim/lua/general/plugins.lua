@@ -50,6 +50,7 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lua"                          -- Completions for nvim lua API
     use "hrsh7th/cmp-nvim-lsp"                          -- Completions From Builtin LSP
     use "saadparwaiz1/cmp_luasnip"                      -- Completions From Snippets
+    use "lukas-reineke/lsp-format.nvim"                 -- Format via lsp
 
     -- Completion Modifier
     use "lukas-reineke/cmp-under-comparator"            -- Sort underline competions to bottom

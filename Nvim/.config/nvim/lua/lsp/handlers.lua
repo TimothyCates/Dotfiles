@@ -1,4 +1,7 @@
 local M = {}
+local formatter = require('lsp-format')
+formatter.setup{}
+
 M.setup = function()
     local signs = {
         { name = "DiagnosticSignError", text = "" },
@@ -78,6 +81,7 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+    formatter.on_attach(client)
     if client.name == "tsserver" then
         client.resolved_capabilities.document_formatting = false
     end
