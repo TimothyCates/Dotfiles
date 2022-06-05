@@ -2,7 +2,7 @@
 local keymap = vim.api.nvim_set_keymap
 
 -- Option shorthand
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
 -- Leader key setup
 keymap("", "<Space>", "<Nop>", opts)
@@ -26,7 +26,7 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 -- Buffer Movement
 keymap('n', '<S-h>', ':BufferLineCyclePrev<cr>', opts)
 keymap('n', '<S-l>', ':BufferLineCycleNext<cr>', opts)
-keymap('n', '<S-x>', ':Bdelete<cr>',opts)
+keymap('n', '<S-x>', ':Bdelete<cr>', opts)
 
 -- Toggle Nvim-tree
 keymap('n', '<Leader><Leader>', ':NvimTreeToggle<cr>', opts)
@@ -47,6 +47,26 @@ keymap('n', '<C-i>', '<C-i>zz', opts)
 -- -- One line to center the first result when searching for/back
 vim.api.nvim_exec([[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>']], false)
 
+-- ToggleTerm
+for i = 1, 4 do
+    keymap('n', '<Leader>' .. i, ':' .. i .. 'ToggleTerm<cr>', opts)
+end
+
+keymap('n', '<Leader>g', ':99ToggleTerm direction=float<cr>', opts) -- float is better for git
+
+-- ToggleTerm movement keymaps
+function _G.set_terminal_keymaps()
+    local opts = { noremap = true }
+    vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+end
+
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
 -- INSERT---------------------------------------------------
 
 -- VISUAL---------------------------------------------------
@@ -65,6 +85,3 @@ keymap('v', 'p', '"_dP', opts)
 -- Move selection up and down with shift + movement
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-
-
-
