@@ -1,11 +1,9 @@
 --List of plugins we are using actively
 
 require 'plugins.autopairs'
-require 'plugins.autosave'
 require 'plugins.bufferline'
 require 'plugins.colorizer'
 require 'plugins.cmp'
-require 'plugins.focus'
 require 'plugins.gitsigns'
 require 'plugins.hlargs'
 require 'plugins.indent_blankline'
@@ -18,4 +16,4 @@ require 'plugins.tmux'
 require 'plugins.todo-comments'
 require 'plugins.treesitter'
 require 'plugins.trouble'
-
+require 'plugins.toggleterm'
