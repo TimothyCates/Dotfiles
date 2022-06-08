@@ -36,9 +36,6 @@
   alias lS='ls -1'
   alias lT='ls --tree'
   alias lt='lT --level=2'
-  
-  #My personal screenshot preference
-  alias screenshot="scrot -f -s -p -q 100 -e 'mv \$f ~/Pictures/%b-%-d-%Y-%-I%M%p.png'"
 
   #redirect vi/vim to nvim 
   alias vi="nvim"
@@ -64,15 +61,6 @@
  
   #list all mounted devices and thier mount locations in a readable way
   alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
-
-  #managing packages with yay
-  alias search='yay -Ss'
-  alias install='yay -S'
-  alias update='yay -Syu --devel'
-  alias uninstall='yay -Rs'
-  alias clean='yay -Yc'
-
-  alias gendb='yay -Y --gendb'
 
   alias bckMirrors='sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup'
   alias upMirrors='sudo reflector --latest 200 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist'

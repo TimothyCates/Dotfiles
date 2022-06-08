@@ -37,7 +37,7 @@ env:
   TERM: xterm-256color
 
 window:
-  opacity: 1
+  opacity: 0.94
   padding: 
     x: 10
     y: 0
@@ -64,7 +64,7 @@ font:
 colors: *tokyo-dark
 
 selection:
-  save_to_clipbourd: true
+  save_to_clipboard: true
 
 cursor:
   style:
