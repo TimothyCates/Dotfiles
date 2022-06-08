@@ -5,9 +5,9 @@ if not lspOk or not ConfigOk then
     return
 end
 
-local servers = {"jsonls", "sumneko_lua", "eslint", "tsserver", "emmet_ls"}
+local servers = { "jsonls", "sumneko_lua", "eslint", "tsserver", "emmet_ls", "html", "tailwindcss" }
 
-lsp_installer.setup{
+lsp_installer.setup {
     ensure_installed = servers
 }
 
