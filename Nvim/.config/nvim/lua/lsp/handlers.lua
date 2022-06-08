@@ -1,6 +1,6 @@
 local M = {}
 local formatter = require('lsp-format')
-formatter.setup{}
+formatter.setup {}
 
 M.setup = function()
     local signs = {
@@ -47,14 +47,14 @@ local function lsp_highlight_document(client)
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(
-        [[
+            [[
         augroup lsp_document_highlight
             autocmd! * <buffer>
             autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
             autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
         augroup END
-        ]],
-        false
+        ]]   ,
+            false
         )
     end
 end
@@ -69,11 +69,11 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(
-    bufnr,
-    "n",
-    "gl",
-    '<cmd>lua vim.diagnostic.open_float<CR>',
-    opts
+        bufnr,
+        "n",
+        "gl",
+        '<cmd>lua vim.diagnostic.open_float({focus=false})<CR>',
+        opts
     )
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
@@ -93,7 +93,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
-  return
+    return
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
