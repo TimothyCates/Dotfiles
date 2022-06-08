@@ -28,7 +28,11 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'FocusGained' }, {
     desc = 'git branch and LSP errors for the statusline',
     callback = function()
         local branch = vim.fn.system "git branch --show-current | tr -d '\n'"
-        vim.b.branch_name = '  ' .. branch .. ' '
+        if string.sub(branch, 1, 16) == 'fatal: not a git' then
+            vim.b.branch_name = ''
+        else
+            vim.b.branch_name = '  ' .. branch .. ' '
+        end
 
         local num_errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
 
