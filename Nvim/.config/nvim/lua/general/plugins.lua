@@ -74,11 +74,16 @@ return packer.startup(function(use)
     use 'b3nj5m1n/kommentary' -- Smart Commenting Tool
     use 'lewis6991/gitsigns.nvim' -- Git Decorations
     use 'norcalli/nvim-colorizer.lua' -- Color Hex/Color-Code in Doc
-    use 'nvim-telescope/telescope.nvim' -- Fuzzy/File Search
     use 'folke/trouble.nvim' -- Window To Show All LSP Errors
     use 'aserowy/tmux.nvim' -- TMUX NVIM Navigation/Control
     use 'kyazdani42/nvim-tree.lua' -- File Browser
     use 'windwp/nvim-autopairs' -- Autopair {']" chars
+
+    -- Telescope
+    use 'nvim-telescope/telescope.nvim' -- Fuzzy/File Search
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- Native compiled fzf
+    use "chip/telescope-software-licenses.nvim" --list of software lic's to paste
+    use "ThePrimeagen/git-worktree.nvim"
 
     -- Syntax Highlighting (treesitter)
     use { -- Treesitter itself
