@@ -51,8 +51,13 @@ vim.api.nvim_exec([[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype
 for i = 1, 4 do
     keymap('n', '<Leader>' .. i, ':' .. i .. 'ToggleTerm<cr>', opts)
 end
+local lazygit = require('toggleterm.terminal').Terminal:new({ direction = 'float', cmd = 'lazygit', hidden = true })
 
-keymap('n', '<Leader>g', ':99ToggleTerm direction=float<cr>', opts) -- float is better for git
+function _lazygit_toggle()
+    lazygit:toggle()
+end
+
+keymap('n', '<Leader>g', ':lua _lazygit_toggle()<cr>', opts) -- float is better for git
 
 -- ToggleTerm movement keymaps
 function _G.set_terminal_keymaps()
@@ -65,6 +70,16 @@ function _G.set_terminal_keymaps()
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+-- Telescope Related
+keymap('n', '<Leader>s', ':Telescope live_grep<cr>', opts) -- Search project with grep
+keymap('n', '<Leader>ff', ':Telescope find_files<cr>', opts) --Find Files
+keymap('n', '<Leader>ct', ':lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>', opts) --Find Files
+keymap('n', '<Leader>st', ':lua require("telescope").extensions.git_worktree.git_worktrees()<cr>', opts) --Find Files
+
+-- Colorizer fix (its very buggy with moving text, so lets reset it when we can)
+vim.cmd('autocmd! TextChanged * silent! ColorizerAttachToBuffer')
+vim.cmd('autocmd! InsertLeave * silent! ColorizerAttachToBuffer')
 
 -- INSERT---------------------------------------------------
 
