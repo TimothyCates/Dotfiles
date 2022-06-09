@@ -15,6 +15,8 @@ local backspace = function()
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
+snip.filetype_extend("javascript", { "javascriptreact" })
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -33,6 +35,12 @@ cmp.setup {
             c = cmp.mapping.close(),
         },
 
+        ["<C-n>"] = cmp.mapping(function()
+            if snip.jumpable(1) then
+                snip.jump(1)
+            end
+        end, { "i", "s" }),
+
         ["<CR>"] = cmp.mapping.confirm { select = true },
         -- Lunarvims "supertab"
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -40,73 +48,59 @@ cmp.setup {
                 cmp.select_next_item()
             elseif snip.expandable() then
                 snip.expand()
-            elseif snip.expand_or_jumpable() then
-                snip.expand_or_jump()
             elseif backspace() then
                 fallback()
             else
                 fallback()
             end
         end, {
-        "i",
-        "s",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-            cmp.select_prev_item()
-        elseif snip.jumpable(-1) then
-            snip.jump(-1)
-        else
-            fallback()
-        end
-    end, {
-    "i",
-    "s",
-}),
-  },
-  formatting = {
-      format = lspkind.cmp_format({
-          mode = 'symbol_text',
-          maxwidth = 30,
-          before = function (entry, vim_item)
-              return vim_item
-          end
-      })
-  },
-  sources = {
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "buffer" },
-      { name = "path" },
-      -- Specific Scenarios:
-      {name = "cmdline"},
-      {name = "npm", keyword_length = 4},
-      {name = "tmux"},
-      {name = "nvim_lua"}
-  },
-  sorting = {
-      comparators = {
-          cmp.config.compare.offset,
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          underSort.under,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-      },
-  },
-  confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-  },
-  window = {
-      documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    }
-  },
-  experimental = {
-      ghost_text = false,
-      native_menu = false,
-  },
+            "i",
+            "s",
+        }),
+    },
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            maxwidth = 30,
+            before = function(entry, vim_item)
+                return vim_item
+            end
+        })
+    },
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
+        -- Specific Scenarios:
+        { name = "cmdline" },
+        { name = "npm", keyword_length = 4 },
+        { name = "tmux" },
+        { name = "nvim_lua" }
+    },
+    sorting = {
+        comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            underSort.under,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
+    },
+    confirm_opts = {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = false,
+    },
+    window = {
+        documentation = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        }
+    },
+    experimental = {
+        ghost_text = false,
+        native_menu = false,
+    },
 }
