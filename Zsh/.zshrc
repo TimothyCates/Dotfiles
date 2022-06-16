@@ -1,25 +1,35 @@
 ### Plugin Managment
-  # Clone Zcomet if needed
-  if [[ ! -f ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh ]]; then
-    command git clone https://github.com/agkozak/zcomet.git ${ZDOTDIR:-${HOME}}/.zcomet/bin
+  # Clone zplug if needed
+  if [[ ! -f ${ZDOTDIR:-${HOME}}/.zplug/init.zsh ]]; then
+    command git clone https://github.com/zplug/zplug.git ${ZDOTDIR:-${HOME}}/.zplug
   fi
 
-  # Load Zcomet once cloned
-  source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
+  # Load zplug once cloned
+  source ${ZDOTDIR:-${HOME}}/.zplug/init.zsh
   
   #list of plugins
-  zcomet load zsh-users/zsh-autosuggestions               #Command suggestions
-  zcomet load wting/autojump                              #Smart cd replacement based on prev dir's
-  zcomet load Tarrasch/zsh-bd                             #Move to a parent dir in a fuzzy way
-  zcomet load zpm-zsh/clipboard                           #Allows direct access to clipboard through pipe
-  zcomet load zsh-users/zsh-syntax-highlighting           #Highlighting for commands
-  zcomet load zsh-users/zsh-completions                   #More completions for zsh
-  zcomet load zsh-users/zsh-history-substring-search      #Search prev commands via substr
-  zcomet load ChrisPenner/copy-pasta                      #Allows copy and paste of files
-  zcomet load mdumitru/fancy-ctrl-z                       #Enable ctrl z to go back into vim
+  zplug "zsh-users/zsh-autosuggestions"               #Command suggestions
+  zplug "Tarrasch/zsh-bd"                             #Move to a parent dir in a fuzzy way
+  zplug "zpm-zsh/clipboard"                           #Allows direct access to clipboard through pipe
+  zplug "zsh-users/zsh-syntax-highlighting"           #Highlighting for commands
+  zplug "zsh-users/zsh-completions"                   #More completions for zsh
+  zplug "zsh-users/zsh-history-substring-search"      #Search prev commands via substr
+  zplug "ChrisPenner/copy-pasta"                      #Allows copy and paste of files
+  zplug "mdumitru/fancy-ctrl-z"                       #Enable ctrl z to go back into vim
+  zplug "b4b4r07/enhancd", use:init.sh                #better cd
+  # Install plugins if there are plugins that have not been installed
+  if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+  fi
 
-  # Run compinit and compile cache
-  zcomet compinit
+# Then, source plugins and add commands to $PATH
+zplug load 
+
+    ENHANCD_FILTER=fzy:fzf:peco
+    export ENHANCD_FILTER
 ### History
   HISTFILE=~/.histfile
   HISTSIZE=10000
