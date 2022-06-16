@@ -41,7 +41,7 @@ cmp.setup {
             end
         end, { "i", "s" }),
 
-        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<CR>"] = cmp.mapping.confirm { select = false },
         -- Lunarvims "supertab"
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
