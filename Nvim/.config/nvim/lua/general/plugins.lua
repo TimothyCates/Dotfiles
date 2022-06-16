@@ -70,7 +70,6 @@ return packer.startup(function(use)
 
     -- Feature Enchancments
     use 'jghauser/mkdir.nvim' -- Make Missing Dirs on Save
-    use 'abecodes/tabout.nvim' -- Tab Out of Parens
     use 'b3nj5m1n/kommentary' -- Smart Commenting Tool
     use 'lewis6991/gitsigns.nvim' -- Git Decorations
     use 'norcalli/nvim-colorizer.lua' -- Color Hex/Color-Code in Doc
@@ -78,6 +77,7 @@ return packer.startup(function(use)
     use 'aserowy/tmux.nvim' -- TMUX NVIM Navigation/Control
     use 'kyazdani42/nvim-tree.lua' -- File Browser
     use 'windwp/nvim-autopairs' -- Autopair {']" chars
+    use 'tpope/vim-surround' --Surround selection/motion with x
 
     -- Telescope
     use 'nvim-telescope/telescope.nvim' -- Fuzzy/File Search
