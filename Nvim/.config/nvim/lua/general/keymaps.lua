@@ -74,8 +74,9 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 -- Telescope Related
 keymap('n', '<Leader>s', ':Telescope live_grep<cr>', opts) -- Search project with grep
 keymap('n', '<Leader>ff', ':Telescope find_files<cr>', opts) --Find Files
-keymap('n', '<Leader>ct', ':lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>', opts) --Find Files
-keymap('n', '<Leader>st', ':lua require("telescope").extensions.git_worktree.git_worktrees()<cr>', opts) --Find Files
+--Git worktree to swap trees
+keymap('n', '<Leader>ct', ':lua require("telescope").extensions.git_worktree.create_git_worktree()<cr>', opts) --Make new tree
+keymap('n', '<Leader>st', ':lua require("telescope").extensions.git_worktree.git_worktrees()<cr>', opts) --switch/delete/view trees
 
 -- Colorizer fix (its very buggy with moving text, so lets reset it when we can)
 vim.cmd('autocmd! TextChanged * silent! ColorizerAttachToBuffer')
