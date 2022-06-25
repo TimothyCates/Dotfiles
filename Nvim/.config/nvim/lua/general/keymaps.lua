@@ -49,24 +49,24 @@ vim.api.nvim_exec([[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype
 
 -- ToggleTerm
 for i = 1, 4 do
-    keymap('n', '<Leader>' .. i, ':' .. i .. 'ToggleTerm<cr>', opts)
+  keymap('n', '<Leader>' .. i, ':' .. i .. 'ToggleTerm<cr>', opts)
 end
 local lazygit = require('toggleterm.terminal').Terminal:new({ direction = 'float', cmd = 'lazygit', hidden = true })
 
 function _lazygit_toggle()
-    lazygit:toggle()
+  lazygit:toggle()
 end
 
 keymap('n', '<Leader>g', ':lua _lazygit_toggle()<cr>', opts) -- float is better for git
 
 -- ToggleTerm movement keymaps
 function _G.set_terminal_keymaps()
-    local opts = { noremap = true }
-    vim.api.nvim_buf_set_keymap(0, 't', '<C-n>', [[<C-\><C-n>]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-    vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-n>', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
@@ -97,5 +97,5 @@ keymap('v', 'p', '"_dP', opts)
 
 -- VISUAL BLOCK---------------------------------------------
 -- Move selection up and down with shift + movement
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "J", ":move '>+1<CR>gv-gvzz", opts)
+keymap("x", "K", ":move '<-2<CR>gv-gvzz", opts)
