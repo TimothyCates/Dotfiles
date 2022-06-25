@@ -3,10 +3,6 @@ if not ok then
   return
 end
 
--- This is designed to make nvim-tree close when it is the last window
-vim.cmd [[
-autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-]]
 
 tree.setup {
   auto_reload_on_write = true,
