@@ -94,5 +94,5 @@ tree.setup {
 }
 
 
--- Refresh NvimTree after every 30 seconds to update git signs and be more responsive
-vim.cmd [[call timer_start(1000 * 30, {-> execute(':NvimTreeRefresh')}, {'repeat': -1})]]
+-- Refresh NvimTree after every 5 seconds to update git signs and be more responsive
+vim.cmd [[call timer_start(1000 * 5, {-> execute(':NvimTreeRefresh')}, {'repeat': -1})]]
