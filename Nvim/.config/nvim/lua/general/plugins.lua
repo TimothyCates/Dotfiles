@@ -43,13 +43,12 @@ return packer.startup(function(use)
 
   -- Completion
   use "hrsh7th/nvim-cmp" -- Completion Engine
+  use "saadparwaiz1/cmp_luasnip" -- Completions From Snippets
   use "hrsh7th/cmp-buffer" -- Completions from Buffers
   use "hrsh7th/cmp-path" -- Path-based Completions
   use "david-kunz/cmp-npm" -- NPM Completions
-  use "andersevenrud/cmp-tmux" -- Completions from tmux panes
   use "hrsh7th/cmp-nvim-lua" -- Completions for nvim lua API
   use "hrsh7th/cmp-nvim-lsp" -- Completions From Builtin LSP
-  use "saadparwaiz1/cmp_luasnip" -- Completions From Snippets
   use "lukas-reineke/lsp-format.nvim" -- Format via lsp
 
   -- Completion Modifier
