@@ -1,7 +1,7 @@
 local options = vim.opt
 local eval = vim.cmd
 
--- Backup/Undo Settings 
+-- Backup/Undo Settings
 options.backup = false
 options.undofile = true
 options.swapfile = false
@@ -29,9 +29,9 @@ options.showmode = false
 options.clipboard = 'unnamedplus'
 options.termguicolors = true
 options.expandtab = true
-options.shiftwidth = 4
-options.tabstop = 4
-options.softtabstop = 4
+options.shiftwidth = 2
+options.tabstop = 2
+options.softtabstop = 2
 options.number = true
 options.scrolloff = 8
 options.updatetime = 300
@@ -42,7 +42,7 @@ options.signcolumn = "yes"
 eval [[set iskeyword+=-]]
 
 -- Encoding
-options.encoding= 'utf-8'
+options.encoding = 'utf-8'
 options.fileencoding = 'utf-8'
 eval [[set formatoptions-=c]]
 eval [[set formatoptions-=r]]
