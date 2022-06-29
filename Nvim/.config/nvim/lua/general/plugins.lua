@@ -45,7 +45,7 @@ return packer.startup(function(use)
 
   -- Completion
   use "hrsh7th/nvim-cmp" -- Completion Engine
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires='hrsh7th/nvim-cmp'}
+  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
   use "saadparwaiz1/cmp_luasnip" -- Completions From Snippets
   use "hrsh7th/cmp-buffer" -- Completions from Buffers
   use "hrsh7th/cmp-path" -- Path-based Completions
@@ -63,7 +63,6 @@ return packer.startup(function(use)
 
   -- Visual Enchancments
   use 'folke/todo-comments.nvim' -- Color Todo Comments
-  use 'karb94/neoscroll.nvim' -- Smooth Scrolling
   use 'kyazdani42/nvim-web-devicons' -- Web-Dev Icons
   use 'lukas-reineke/indent-blankline.nvim' -- Indent Guides
   use 'akinsho/bufferline.nvim' -- Buffer Tabline
@@ -84,7 +83,7 @@ return packer.startup(function(use)
   use "Pocco81/AutoSave.nvim" --Autosave
   use 'windwp/nvim-ts-autotag' -- Auto-Close Tags
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Make Kommentary Use Correct Comment Type
-  use {  --popout terminal
+  use { --popout terminal
     "akinsho/toggleterm.nvim",
     tag = ' v1.* ',
     config = function()
