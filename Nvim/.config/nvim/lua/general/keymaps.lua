@@ -51,10 +51,14 @@ vim.api.nvim_exec([[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype
 for i = 1, 4 do
   keymap('n', '<Leader>' .. i, ':' .. i .. 'ToggleTerm<cr>', opts)
 end
-local lazygit = require('toggleterm.terminal').Terminal:new({ direction = 'float', cmd = 'lazygit', hidden = true })
 
-function _lazygit_toggle()
-  lazygit:toggle()
+local ok, toggleterm = pcall(require, 'toggleterm.terminal')
+if ok then
+  local lazygit = require('toggleterm.terminal').Terminal:new({ direction = 'float', cmd = 'lazygit', hidden = true })
+
+  function _lazygit_toggle()
+    lazygit:toggle()
+  end
 end
 
 keymap('n', '<Leader>g', ':lua _lazygit_toggle()<cr>', opts) -- float is better for git
