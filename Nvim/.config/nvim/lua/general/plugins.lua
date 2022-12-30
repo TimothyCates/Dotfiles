@@ -81,7 +81,7 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-tree.lua' -- File Browser
   use 'windwp/nvim-autopairs' -- Autopair {']" chars
   use 'tpope/vim-surround' --Surround selection/motion with x
-  use "Pocco81/AutoSave.nvim" --Autosave
+  -- use "Pocco81/AutoSave.nvim" --Autosave
   use 'windwp/nvim-ts-autotag' -- Auto-Close Tags
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Make Kommentary Use Correct Comment Type
   use { --popout terminal

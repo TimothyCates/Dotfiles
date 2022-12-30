@@ -4,9 +4,9 @@ if not ok then
 end
 
 autosave.setup({
-  enabled = true,
+  enabled = false,
   execution_message = "",
-  events = { "InsertLeave", "TextChanged" },
+  events = {},
   conditions = {
     exists = true,
     filename_is_not = {},
