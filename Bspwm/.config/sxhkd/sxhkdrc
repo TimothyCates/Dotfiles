@@ -112,4 +112,4 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
 	amixer set Master 5%+
 XF86AudioMute
-        amixer set Master toggle
+  amixer set Master toggle
