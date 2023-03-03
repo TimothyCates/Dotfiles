@@ -1,10 +1,9 @@
 # terminal emulator
 super + Return
-	alacritty
+	kitty
 
 # program launcher
-super + @space
-	~/.config/polybar/scripts/launcher.sh &
+# super + @space
 
 # make sxhkd reload its configuration files:
 super + Escape
