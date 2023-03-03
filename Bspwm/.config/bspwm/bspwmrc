@@ -1,9 +1,9 @@
 #! /bin/sh
-
 #### AutoStart section
 ## Keybinds
     setxkbmap -v us
     sxhkd &
+
 ## Display
 	picom --experimental-backends -f &
 
@@ -26,8 +26,6 @@
         nitrogen --set-zoom-fill --random --head=$index $HOME/Pictures/Wallpapers
     done
 
-## Polybar
-    ~/.config/polybar/launch.sh &
 
 #### BSPWM Configuration
 	bspc config border_width         3
