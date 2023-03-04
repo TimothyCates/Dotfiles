@@ -1,43 +1,49 @@
 #! /bin/sh
-#### AutoStart section
-## Keybinds
-    setxkbmap -v us
-    sxhkd &
+#################################
+#           Autostart           #
+#################################
 
-## Display
-	picom --experimental-backends -f &
+xsetroot -cursor_name left_ptr
+setxkbmap -v us
+sxhkd &
+picom &
 
-## Cursor
-	xsetroot -cursor_name left_ptr
+#################################
+#            Monitors           #
+#################################
 
-## Monitor setup
-    xoutput=$(xrandr | grep ' connected' | cut -d' ' -f1)
-    readarray -t displays <<< "$xoutput"
-    startIndex=1
-    for index in "${!displays[@]}"
-    do
-        bspc monitor ${displays[index]} -d  $startIndex $((startIndex+1)) $((startIndex+2)) $((startIndex+3))
-        ((startIndex=startIndex+4))
-    done
+xoutput=$(xrandr | grep ' connected' | cut -d' ' -f1)
+readarray -t displays <<< "$xoutput"
+startIndex=1
+for index in "${!displays[@]}"
+do
+    bspc monitor ${displays[index]} -d  $startIndex $((startIndex+1)) $((startIndex+2)) $((startIndex+3))
+    ((startIndex=startIndex+4))
+done
 
-## Wallpaper setup
-    for index in "${!displays[@]}"
-    do
-        nitrogen --set-zoom-fill --random --head=$index $HOME/Pictures/Wallpapers
-    done
+for index in "${!displays[@]}"
+do
+    nitrogen --set-zoom-fill --random --head=$index $HOME/Pictures/Wallpapers
+done
 
 
-#### BSPWM Configuration
-	bspc config border_width         3
-	bspc config window_gap          10
+#################################
+#             Borders           #
+#################################
 
-    bspc config normal_border_color \#363945
-    bspc config active_border_color \#363945
-    bspc config focused_border_color \#9471C1
+bspc config border_width 3
+bspc config window_gap 10
 
-    bspc config automatic_scheme longest_side
+bspc config normal_border_color \#363945
+bspc config active_border_color \#363945
+bspc config focused_border_color \#9471C1
 
-    bspc config split_ratio          0.52
-    bspc config borderless_monocle   true
-    bspc config gapless_monocle      false
-    bspc config single_monocle       true
+#################################
+#              Misc             #
+#################################
+
+bspc config automatic_scheme longest_side
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      false
+bspc config single_monocle       true
