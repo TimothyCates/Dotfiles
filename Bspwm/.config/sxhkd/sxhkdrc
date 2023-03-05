@@ -17,8 +17,9 @@ super + Escape
 super + c
   bspc node -c
 
-#Print
-#    scrot -f -s -p -q 100 -e 'mv \$f ~/Pictures/%b-%-d-%Y-%-I%M%p.png' 
+# Screenshot selection copy to clipboard
+Print
+  flameshot gui -c -s
 
 # quit/restart bspwm
 super + alt + {q,r}
