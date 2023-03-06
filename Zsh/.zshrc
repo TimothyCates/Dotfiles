@@ -31,7 +31,7 @@ zplug load
     ENHANCD_FILTER=fzy:fzf:peco
     export ENHANCD_FILTER
 ### History
-  HISTFILE=~/.histfile
+  HISTFILE=~/.zplug/.histfile
   HISTSIZE=10000
   SAVEHIST=10000
   
@@ -47,9 +47,6 @@ zplug load
   alias lT='ls --tree'
   alias lt='lT --level=2'
   
-  #My personal screenshot preference
-  alias screenshot="scrot -f -s -p -q 100 -e 'mv \$f ~/Pictures/%b-%-d-%Y-%-I%M%p.png'"
-
   #redirect vi/vim to nvim 
   alias vi="nvim"
   alias vim="nvim"
@@ -85,7 +82,7 @@ zplug load
   alias gendb='yay -Y --gendb'
 
   alias bckMirrors='sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup'
-  alias upMirrors='sudo reflector --latest 200 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist'
+  alias upMirrors='sudo reflector --latest 100 --protocol http,https --sort rate --country us --save /etc/pacman.d/mirrorlist'
 
 ### Misc
   #set out editor to nvim incase we need it
