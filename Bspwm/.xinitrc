@@ -37,5 +37,4 @@ xset m 0 0
 #          Autostart            #
 #################################
 
-numlockx &
 exec bspwm
