@@ -1,4 +1,7 @@
-### Plugin Managment
+#################################
+#        Plugin Managment       #
+#################################
+
   # Clone zplug if needed
   if [[ ! -f ${ZDOTDIR:-${HOME}}/.zplug/init.zsh ]]; then
     command git clone https://github.com/zplug/zplug.git ${ZDOTDIR:-${HOME}}/.zplug
@@ -27,71 +30,74 @@
 
 # Then, source plugins and add commands to $PATH
 zplug load 
+ENHANCD_FILTER=fzy:fzf:peco
+export ENHANCD_FILTER
 
-    ENHANCD_FILTER=fzy:fzf:peco
-    export ENHANCD_FILTER
-### History
-  HISTFILE=~/.zplug/.histfile
-  HISTSIZE=10000
-  SAVEHIST=10000
-  
-  # Write to history immediately and save timestamp
-  setopt inc_append_history
-  setopt extended_history
 
-##Alias'
-  #ls related alias
-  alias ls='exa'
-  alias lsa='ls -a'
-  alias lS='ls -1'
-  alias lT='ls --tree'
-  alias lt='lT --level=2'
-  
-  #redirect vi/vim to nvim 
-  alias vi="nvim"
-  alias vim="nvim"
+#################################
+#       History Settings        #
+#################################
 
-  #color grep output
-  alias grep='grep --color=auto'
+HISTFILE=~/.zplug/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
 
-  #some nice cd tricks
-  alias ~='cd ~/'
-  alias ..='cd ..; ls'
+setopt inc_append_history
+setopt extended_history
 
-  #I shouldnt need to specify each dir
-  alias mkdir='mkdir -pv'
+#################################
+#            Alias              #
+#################################
 
-  #I prefer to type clear over ctrl + l
-  alias c='clear'
-  
-  #protect myself from myself
-  alias chown='chown --preserve-root'
-  alias chmod='chmod --preserve-root'
-  alias chgrp='chgrp --preserve-root'
- 
-  #list all mounted devices and thier mount locations in a readable way
-  alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
+alias ls='exa'
+alias lsa='exa -a'
+alias lS='exa -1'
+alias lT='exa --tree'
+alias lt='exa --tree --level=2'
 
-  #managing packages with yay
-  alias search='yay -Ss'
-  alias install='yay -S'
-  alias update='yay -Syu --devel'
-  alias uninstall='yay -Rs'
-  alias clean='yay -Yc'
+# Redirect vi/vim to nvim 
+alias vi="nvim"
+alias vim="nvim"
 
-  alias gendb='yay -Y --gendb'
+# Color grep output
+alias grep='grep --color=auto'
 
-  alias bckMirrors='sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup'
-  alias upMirrors='sudo reflector --latest 100 --protocol http,https --sort rate --country us --save /etc/pacman.d/mirrorlist'
+# I shouldnt need to specify each dir
+alias mkdir='mkdir -pv'
 
-### Misc
-  #set out editor to nvim incase we need it
-  export Editor="nvim"
+alias c='clear'
 
-  #ensure auto cd is off
-  unsetopt autocd
-  #ensure error beeping is off
-  unsetopt beep
+# Protect myself from myself
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+# List all mounted devices and thier mount locations in a readable way
+alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | grep -E --color=auto ^/dev/ | sort"
+
+#################################
+#      Package Managment        #
+#################################
+
+alias search='yay -Ss'
+alias install='yay -S'
+alias update='yay -Syu --devel'
+alias uninstall='yay -Rs'
+alias clean='yay -Yc'
+
+alias gendb='yay -Y --gendb'
+
+alias bckMirrors='sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup'
+alias upMirrors='sudo systemctl start reflector.service &'
+
+#################################
+#         Misc Settings         #
+#################################
+
+export Editor="nvim"
+unsetopt autocd
+unsetopt beep
+
 typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ad8ee6" 
 typeset -g ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
