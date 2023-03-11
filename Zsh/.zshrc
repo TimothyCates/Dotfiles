@@ -20,10 +20,7 @@ zplug "mdumitru/fancy-ctrl-z"                       #Enable ctrl z to toggle bet
 zplug "b4b4r07/enhancd", use:init.sh                #better cd
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-      echo; zplug install
-  fi
+  echo; zplug install
 fi
 
 # Then, source plugins and add commands to $PATH
