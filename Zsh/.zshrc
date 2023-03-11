@@ -12,7 +12,6 @@ source ${ZDOTDIR:-${HOME}}/.zplug/init.zsh
 
 #list of plugins
 zplug "zsh-users/zsh-autosuggestions"               #Command suggestions
-zplug "Tarrasch/zsh-bd"                             #Move to a parent dir in a fuzzy way
 zplug "zsh-users/zsh-syntax-highlighting"           #Highlighting for commands
 zplug "zsh-users/zsh-completions"                   #More completions for zsh
 zplug "zsh-users/zsh-history-substring-search"      #Search prev commands via substr
