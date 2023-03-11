@@ -2,31 +2,30 @@
 #        Plugin Managment       #
 #################################
 
-  # Clone zplug if needed
-  if [[ ! -f ${ZDOTDIR:-${HOME}}/.zplug/init.zsh ]]; then
-    command git clone https://github.com/zplug/zplug.git ${ZDOTDIR:-${HOME}}/.zplug
-  fi
+# Clone zplug if needed
+if [[ ! -f ${ZDOTDIR:-${HOME}}/.zplug/init.zsh ]]; then
+  command git clone https://github.com/zplug/zplug.git ${ZDOTDIR:-${HOME}}/.zplug
+fi
 
-  # Load zplug once cloned
-  source ${ZDOTDIR:-${HOME}}/.zplug/init.zsh
-  
-  #list of plugins
-  zplug "zsh-users/zsh-autosuggestions"               #Command suggestions
-  zplug "Tarrasch/zsh-bd"                             #Move to a parent dir in a fuzzy way
-  zplug "zpm-zsh/clipboard"                           #Allows direct access to clipboard through pipe
-  zplug "zsh-users/zsh-syntax-highlighting"           #Highlighting for commands
-  zplug "zsh-users/zsh-completions"                   #More completions for zsh
-  zplug "zsh-users/zsh-history-substring-search"      #Search prev commands via substr
-  zplug "ChrisPenner/copy-pasta"                      #Allows copy and paste of files
-  zplug "mdumitru/fancy-ctrl-z"                       #Enable ctrl z to go back into vim
-  zplug "b4b4r07/enhancd", use:init.sh                #better cd
-  # Install plugins if there are plugins that have not been installed
-  if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+# Load zplug once cloned
+source ${ZDOTDIR:-${HOME}}/.zplug/init.zsh
+
+#list of plugins
+zplug "zsh-users/zsh-autosuggestions"               #Command suggestions
+zplug "Tarrasch/zsh-bd"                             #Move to a parent dir in a fuzzy way
+zplug "zsh-users/zsh-syntax-highlighting"           #Highlighting for commands
+zplug "zsh-users/zsh-completions"                   #More completions for zsh
+zplug "zsh-users/zsh-history-substring-search"      #Search prev commands via substr
+zplug "ChrisPenner/copy-pasta"                      #Allows copy and paste of files
+zplug "mdumitru/fancy-ctrl-z"                       #Enable ctrl z to go back into vim
+zplug "b4b4r07/enhancd", use:init.sh                #better cd
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+      echo; zplug install
   fi
+fi
 
 # Then, source plugins and add commands to $PATH
 zplug load 
