@@ -1,18 +1,124 @@
-(defwindow example
+
+;; Variables
+(defvar eww "eww")
+(defvar date_reveal false)
+(defvar wp0 "●")
+(defvar wp1 "○")
+(defvar wp2 "○")
+(defvar wp3 "○")
+(defvar wp4 "○")
+
+(defpoll hour :interval "1s" "scripts/time.sh --hour")
+(defpoll minutes :interval "1s" "scripts/time.sh --minutes")
+(defpoll type :interval "1s" "scripts/time.sh --type")
+(defpoll date :interval "1s" "scripts/time.sh --date")
+
+(defwidget bar []
+  (centerbox
+    :orientation "h"
+    (workspaces)
+    (systray)
+  )
+)
+
+(def widget systray []
+  (eventbox
+    :tooltip "Current time"
+    :onhover "${eww} update date_reveal=true"
+    :onhoverlost "${eww} update datereveal=false"
+    :cursor "pointer"
+    (box
+      :class "time_box"
+      :space-evenly "false"
+      :orientation "h"
+      :valign "center"
+      :halign "fill"
+      (label
+        :valign "center"
+        :class "time"
+        :markup "<span font-weight=\"heavy\">${hour}:${minutes}</span><span font-size=\"xx-small\">${type}</span>"
+      )
+      (revealer
+        :reveal date_reveal
+        :transition "slideright"
+        :duration "350ms"
+        :valign "fill"
+        (label
+          :valign "fill"
+          :class "date"
+          :markup "<span font-size=\"xx-small\">${date}</span>"
+        )
+      )
+    )
+  )
+)
+
+(def widget workspaces []
+  (box
+    :class "workspaces"
+    :space-evenly true
+    :halign "start"
+    :spacing 10
+    (eventbox
+      :cursor "pointer"
+      (button
+        :tooltip "Switch to workspace 1"
+        :onclick "bspc desktop -f 0"
+        (label
+          :markup wp0
+          :class "workspace_buttons"
+        )
+      )
+    )
+    (eventbox
+      :cursor "pointer"
+      (button
+        :tooltip "Switch to workspace 2"
+        :onclick "bspc desktop -f 1"
+        (label
+          :markup wp1
+          :class "workspace_buttons"
+        )
+      )
+    )
+    (eventbox
+      :cursor "pointer"
+      (button
+        :tooltip "Switch to workspace 3"
+        :onclick "bspc desktop -f 2"
+        (label
+          :markup wp2
+          :class "workspace_buttons"
+        )
+      )
+    )
+    (eventbox
+      :cursor "pointer"
+      (button
+        :tooltip "Switch to workspace 4"
+        :onclick "bspc desktop -f 3"
+        (label
+          :markup wp3
+          :class "workspace_buttons"
+        )
+      )
+    )
+    
+  )
+)
+
+(defwindow bar
   :monitor 0
-  :geometry (geometry 
+  :windowtype "dock"
+  :geometry (geometry
     :x "0%"
-    :y "20px"
+    :y "0%"
     :width "90%"
-    :height "30px"
+    :height "10px"
     :anchor "top center"
   )
-  :stacking "fg"
-  :reserve (struts 
-    :distance "40px"
+  :reserve (struts
     :side "top"
+    :distance "4%"
   )
-  :windowtype "dock"
-  :wm-ignore false
-  "Example Content"
 )
