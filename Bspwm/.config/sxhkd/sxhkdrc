@@ -6,7 +6,8 @@ super + Return
 	kitty
 
 # program launcher
-# super + @space
+super + @space
+  rofi -show run
 
 # Restart sxhkd
 super + Escape
