@@ -33,7 +33,7 @@ return packer.startup(function(use)
   -- Essential
   use "wbthomason/packer.nvim" -- Have Packer Manage Itself
   use "nvim-lua/plenary.nvim" -- Dependency for Some Plugins
-
+  use "gpanders/nvim-parinfer"
   -- Colorschemes
   use 'tiagovla/tokyodark.nvim'
 
@@ -46,11 +46,11 @@ return packer.startup(function(use)
 
   -- Completion
   use "hrsh7th/nvim-cmp" -- Completion Engine
-  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
   use "saadparwaiz1/cmp_luasnip" -- Completions From Snippets
   use "hrsh7th/cmp-buffer" -- Completions from Buffers
   use "hrsh7th/cmp-path" -- Path-based Completions
   use "david-kunz/cmp-npm" -- NPM Completions
+  use "/elkowar/yuck.vim"
 
   -- Completion Modifier
   use "hrsh7th/cmp-nvim-lua" -- Completions for nvim lua API
@@ -81,7 +81,6 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-tree.lua' -- File Browser
   use 'windwp/nvim-autopairs' -- Autopair {']" chars
   use 'tpope/vim-surround' --Surround selection/motion with x
-  use "Pocco81/AutoSave.nvim" --Autosave
   use 'windwp/nvim-ts-autotag' -- Auto-Close Tags
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Make Kommentary Use Correct Comment Type
   use { --popout terminal
