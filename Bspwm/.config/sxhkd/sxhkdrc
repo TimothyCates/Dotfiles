@@ -58,12 +58,8 @@ super + m
 	bspc desktop -l next
 
 # Control focus
-super + shift + {h,j,k,l}
+super + {h,j,k,l}
   bspc node -f {west, south, north, east}
-
-# Focus last node
-super + l
-  bspc node -f last
 
 # Expand in direction
 super + alt + {h,j,k,l}
@@ -80,7 +76,6 @@ super + ctrl + {h,j,k,l}
 # cancel the preselection for the focused node
 super + ctrl + space
 	bspc node -p cancel
-
 
 #################################
 #         Desktop State         #
