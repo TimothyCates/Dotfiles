@@ -70,7 +70,6 @@ cmp.setup {
   },
   sources = {
     { name = "nvim_lsp" },
-    { name = "cmp_tabnine" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
@@ -82,7 +81,6 @@ cmp.setup {
   },
   sorting = {
     comparators = {
-      require('cmp_tabnine.compare'),
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,

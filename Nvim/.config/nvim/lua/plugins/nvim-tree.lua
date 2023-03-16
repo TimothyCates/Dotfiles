@@ -11,7 +11,6 @@ tree.setup {
   hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
   ignore_buffer_on_setup = false,
-  open_on_setup = true,
   open_on_tab = true,
   sort_by = "name",
   update_cwd = true,
@@ -91,7 +90,6 @@ tree.setup {
     },
   },
 }
-
 
 -- Refresh NvimTree after every 5 seconds to update git signs and be more responsive
 vim.cmd [[call timer_start(1000 * 5, {-> execute(':NvimTreeRefresh')}, {'repeat': -1})]]

@@ -1,7 +1,6 @@
 --List of plugins we are using actively
 
 require 'plugins.autopairs'
-require 'plugins.autosave'
 require 'plugins.bufferline'
 require 'plugins.colorizer'
 require 'plugins.cmp'
