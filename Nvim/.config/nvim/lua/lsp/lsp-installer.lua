@@ -6,7 +6,7 @@ if not lspOk or not ConfigOk then
 end
 
 local servers = {
-  "jsonls", "sumneko_lua", "eslint", "tsserver", "emmet_ls",
+  "jsonls", "lua_ls", "eslint", "tsserver", "emmet_ls",
   "html", "cssls", "tailwindcss", "prismals", "rust_analyzer"
 }
 
