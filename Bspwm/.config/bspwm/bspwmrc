@@ -9,7 +9,8 @@ xsetroot -cursor_name left_ptr
 setxkbmap -v us
 sxhkd &
 picom &
-polybar &
+flameshot &
+#polybar &
 
 #################################
 #            Monitors           #
