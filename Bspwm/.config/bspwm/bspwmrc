@@ -3,6 +3,8 @@
 #           Autostart           #
 #################################
 
+# Deal with incorrect primary monitor first
+xrandr --output DP-5 --primary
 xsetroot -cursor_name left_ptr
 setxkbmap -v us
 sxhkd &
