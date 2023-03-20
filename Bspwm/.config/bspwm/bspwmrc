@@ -15,8 +15,10 @@ polybar &
 #            Monitors           #
 #################################
 
+# Make an array of displays
 xoutput=$(xrandr | grep ' connected' | cut -d' ' -f1)
 readarray -t displays <<< "$xoutput"
+# Setup workspaces
 startIndex=1
 for index in "${!displays[@]}"
 do
@@ -24,6 +26,7 @@ do
     ((startIndex=startIndex+4))
 done
 
+# setup wallpapers
 for index in "${!displays[@]}"
 do
     nitrogen --set-zoom-fill --random --head=$index $HOME/Pictures/Wallpapers
