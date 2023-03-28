@@ -5,6 +5,7 @@
 
 # Deal with incorrect primary monitor first
 xrandr --output DP-5 --primary
+
 xsetroot -cursor_name left_ptr
 setxkbmap -v us
 sxhkd &
@@ -19,6 +20,7 @@ flameshot &
 # Make an array of displays
 xoutput=$(xrandr | grep ' connected' | cut -d' ' -f1)
 readarray -t displays <<< "$xoutput"
+
 # Setup workspaces
 startIndex=1
 for index in "${!displays[@]}"
