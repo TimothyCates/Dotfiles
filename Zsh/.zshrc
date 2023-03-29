@@ -89,7 +89,7 @@ alias upMirrors='sudo systemctl start reflector.service &'
 #         Misc Settings         #
 #################################
 
-export Editor="nvim"
+export EDITOR="nvim"
 unsetopt autocd
 unsetopt beep
 
