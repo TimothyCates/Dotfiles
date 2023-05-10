@@ -5,6 +5,10 @@
 super + Return
 	kitty
 
+# Run password rofi
+super + p
+	rofi-rbw
+
 # program launcher
 super + @space
   rofi -show run
