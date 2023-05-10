@@ -1,29 +1,42 @@
 local ok_cmp, cmp = pcall(require, "cmp")
-local ok_snip, snip = pcall(require, "luasnip")
-local ok_npm, npm = pcall(require, "cmp-npm")
+local ok_snip, luasnip = pcall(require, "luasnip")
 local ok_sort, underSort = pcall(require, "cmp-under-comparator")
 local ok_kind, lspkind = pcall(require, "lspkind")
-if not ok_cmp or not ok_snip or not ok_npm or not ok_sort or not ok_kind then
+
+if not ok_cmp or not ok_snip or not ok_sort or not ok_kind then
   return
 end
 
-npm.setup({})
-require("luasnip/loaders/from_vscode").lazy_load() --Load vs_code style snippets eg friendly snippets
+require("luasnip.loaders.from_vscode").lazy_load() -- Friendly Snippets
 
+-- Function land
 local backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
-snip.filetype_extend("javascriptreact", { "html" })
-snip.filetype_extend("javascript", { "html", "javascriptreact" })
+local is_whitespace = function()
+  local col, line = vim.fn.col('.') - 1, vim.fn.getline('.')
+  return col == 0 or line:sub(col, col):match('%s')
+end
+
+local is_comment = function()
+  local ctx = require("cmp.config.context")
+  return ctx.in_treesitter_capture("comment") or ctx.in_syntax_group("Comment")
+end
+
+-- Luasnip extensions
+luasnip.filetype_extend("javascriptreact", { "html" })
+luasnip.filetype_extend("javascript", { "html", "javascriptreact" })
 
 cmp.setup {
+
   snippet = {
     expand = function(args)
-      snip.lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
+
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -35,22 +48,24 @@ cmp.setup {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
-
     ["<C-n>"] = cmp.mapping(function()
-      if snip.jumpable(1) then
-        snip.jump(1)
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
       end
     end, { "i", "s" }),
-
-    ["<CR>"] = cmp.mapping.confirm { select = false },
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
     -- Lunarvims "supertab"
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif snip.expandable() then
-        snip.expand()
-      elseif backspace() then
-        fallback()
+      if not (is_comment() or is_whitespace()) then
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expandable() then
+          luasnip.expand()
+        elseif backspace() then
+          fallback()
+        else
+          fallback()
+        end
       else
         fallback()
       end
@@ -61,29 +76,45 @@ cmp.setup {
   },
   formatting = {
     format = lspkind.cmp_format({
-      mode = 'symbol_text',
+      mode = 'symbol',
       maxwidth = 30,
       before = function(entry, vim_item)
+        vim_item.menu = "(" .. entry.source.name .. ")"
+        vim_item.dup = 0
         return vim_item
       end
     })
   },
   sources = {
     { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "treesitter" },
+    { name = "rg" },
+    {
+      name = "buffer",
+      option = {
+        keyword_pattern = [[\k\+]]
+      }
+    },
     { name = "path" },
-    -- Specific Scenarios:
-    { name = "cmdline" },
-    { name = "npm", keyword_length = 4 },
-    { name = "tmux" },
-    { name = "nvim_lua" }
+    { name = "nvim_lua" },
+    { name = "luasnip" },
+    { name = "emoji" },
+    {
+      name = "latex_symbols",
+      option = {
+        strategy = 0
+      }
+    }
   },
   sorting = {
+    priority_weight = 2,
     comparators = {
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.locality,
       underSort.under,
       cmp.config.compare.kind,
       cmp.config.compare.sort_text,
@@ -101,7 +132,7 @@ cmp.setup {
     }
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = "true",
     native_menu = false,
   },
 }

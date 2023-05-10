@@ -1,5 +1,3 @@
-local options = vim.opt
-
 -- Status autocommands
 -- Credit: u/HarmonicAscendant on reddit
 -----------------------------------------------------------------
@@ -63,6 +61,7 @@ local function status_line()
   local lsp_errors = '%#ErrorNoUnderline#%{get(b:, "errors", "")}%#LineNr#'
   local lsp_warnings = '%#WarningMsg#%{get(b:, "warnings", "")}%#LineNr#'
   local current_time = '%#WildMenu#%{strftime(" %H:%M ")}'
+
   return table.concat {
     gitbranch,
     terminalNumber,
@@ -79,5 +78,5 @@ end
 -- Update statusline every second for clock
 vim.cmd [[call timer_start(1000, {-> execute(':let &stl=&stl')}, {'repeat': -1})]]
 
-options.laststatus = 3
-options.statusline = status_line()
+vim.opt.laststatus = 3
+vim.opt.statusline = status_line()

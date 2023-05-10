@@ -2,21 +2,25 @@ local ok, toggleterm = pcall(require, 'toggleterm')
 if not ok then
   return
 end
+local colors = require("tokyodark.palette")
 
 toggleterm.setup({
   size = 10,
   open_mapping = [[<C-\>]],
   hide_numbers = true,
-  shade_filetypes = {},
-  shade_terminals = true,
-  shading_factor = 2,
+  shade_terminals = false,
+  shading_factor = '-30',
   start_in_insert = true,
   insert_mappings = true,
   terminal_mappings = true,
   persist_size = true,
   direction = 'horizontal',
   close_on_exit = true,
-  shell = vim.o.shell,
+  highlights = {
+    Normal = {
+      guibg = colors.bg0
+    }
+  },
   float_opts = {
     border = 'single',
     winblend = 0,
