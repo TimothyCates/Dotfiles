@@ -7,11 +7,15 @@
 xrandr --output DP-5 --primary
 
 xsetroot -cursor_name left_ptr
+killall sxhkd picom dunst flameshot monderod bitcoin-qt
 setxkbmap -v us
 sxhkd &
 picom &
+dunst &
 flameshot &
-$HOME/.config/eww/launch.sh &
+sudo monerod &
+bitcoin-qt -min &
+# $HOME/.config/eww/launch.sh &
 
 #################################
 #            Monitors           #
@@ -25,6 +29,7 @@ readarray -t displays <<< "$xoutput"
 startIndex=1
 for index in "${!displays[@]}"
 do
+  MONITOR=${displays[index]} polybar topbar &
     bspc monitor ${displays[index]} -d  $startIndex $((startIndex+1)) $((startIndex+2)) $((startIndex+3))
     ((startIndex=startIndex+4))
 done
@@ -34,6 +39,12 @@ for index in "${!displays[@]}"
 do
     nitrogen --set-zoom-fill --random --head=$index $HOME/Pictures/Wallpapers
 done
+
+#################################
+#            Rules              #
+#################################
+
+bspc rule -a pavucontrol -o state=floating
 
 #################################
 #             Borders           #
