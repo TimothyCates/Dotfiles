@@ -67,6 +67,8 @@ alias chgrp='chgrp --preserve-root'
 
 # List all mounted devices and thier mount locations in a readable way
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | grep -E --color=auto ^/dev/ | sort"
+alias ..='cd ../'
+alias .='cd ~'
 
 #################################
 #      Package Managment        #
