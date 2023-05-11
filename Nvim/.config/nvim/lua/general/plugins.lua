@@ -247,6 +247,12 @@ require "dep" {
 
   -- Tree-sitter
   {
+    "theRealCarneiro/hyprland-vim-syntax",
+    requires = {
+      "nvim-treesitter/nvim-treesitter"
+    }
+  },
+  {
     "Wansmer/treesj",
     requires = {
       "nvim-treesitter/nvim-treesitter"
