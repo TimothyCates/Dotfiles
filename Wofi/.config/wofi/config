@@ -1,0 +1,9 @@
+stylesheet = style.css
+show = drun
+width = 30%
+prompt=
+columns = 1
+lines = 6
+layer = overlay
+allow_images=true
+image_size=16
