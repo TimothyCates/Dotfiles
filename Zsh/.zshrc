@@ -60,8 +60,6 @@ alias grep='grep --color=auto'
 # I shouldnt need to specify each dir
 alias mkdir='mkdir -pv'
 
-alias c='clear'
-
 # Protect myself from myself
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
