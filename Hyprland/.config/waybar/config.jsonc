@@ -1,0 +1,64 @@
+{
+// ╭──────────────────────────────────────────────────────────╮
+// │                         Display                          │
+// ╰──────────────────────────────────────────────────────────╯
+  "layer": "top",
+  "height": 44,
+  "spacing": 0,
+
+// ╭──────────────────────────────────────────────────────────╮
+// │                        Bar layout                        │
+// ╰──────────────────────────────────────────────────────────╯
+  "modules-left": [
+    "wlr/workspaces",
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "custom/clock",
+    "custom/power"
+  ],
+
+// ╭──────────────────────────────────────────────────────────╮
+// │                         Modules                          │
+// ╰──────────────────────────────────────────────────────────╯
+  "wlr/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": "<span color='#A0A8CD' font='20 bolder'></span>", 
+      "urgent": "<span color='#EE6D85' font='20 bolder'></span>", 
+      "active": "<span color='#A485DD' font='20 bolder'></span>" 
+    },
+    "on-click": "activate",
+  },
+  "custom/clock": {
+    "format": "󰅐   {}",
+    "interval": 1,
+    "exec": "date '+%-I:%M %P'",
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}",
+    "format-muted": "󰝟  Muted", 
+    "format-bluetooth": "{icon}  {volume}",
+    "format-icons": {
+        "headphone": "󰋋",
+        "headset": "󰋎",
+        "default": ["", "󰕾"]
+    },
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+  },
+  "tray": {
+    "spacing": 10,
+  },
+  "hyprland/window": {
+      "format": "{}",
+      "separate-outputs": true
+  }
+}
+
