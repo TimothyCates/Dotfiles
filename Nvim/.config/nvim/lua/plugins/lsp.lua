@@ -49,7 +49,7 @@ lsp_setup.setup({
   default_mappings = false,
   on_attach = function(client, bufnr)
     require("colorizer").attach_to_buffer()
-    require("lsp-format").on_attach(client)
+    require("lsp-setup.utils").format_on_save(client)
   end,
   capabilities = capabilities,
   servers = {

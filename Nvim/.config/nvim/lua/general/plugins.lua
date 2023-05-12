@@ -185,9 +185,6 @@ require "dep" {
     }
   },
   {
-    "lukas-reineke/lsp-format.nvim"
-  },
-  {
     "rcarriga/nvim-dap-ui",
     requires = {
       "Weissle/persistent-breakpoints.nvim",
