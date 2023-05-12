@@ -11,7 +11,9 @@
 #  ╭──────────╮
 #  │ Geometry │
 #  ╰──────────╯
-    offset = 13x32
+    width = (0,400)
+    height = 120
+    offset = 13x5
     origin = top-right
     indicate_hidden = yes
     shrink = no
@@ -86,16 +88,16 @@
 #  │                          Style                           │
 #  ╰──────────────────────────────────────────────────────────╯
 [urgency_low]
-    background = "#2E344090"
-	foreground = "#D8DEE9"
-	timeout= 4 
+    background = "#11121D"
+    foreground = "#A0A8CD"
+    timeout= 4 
 
 [urgency_normal]
-	background = "#3B425299"
-	foreground = "#E5E9F0"
-	timeout = 4 
+    background = "#11121D"
+    foreground = "#A0A8CD"
+    timeout = 4 
 
 [urgency_critical]
-	background = "#2E344099"
-	foreground = "#D08770"
-	timeout = 0 
+    background = "#11121D"
+    foreground = "#F6955B"
+    timeout = 0 
