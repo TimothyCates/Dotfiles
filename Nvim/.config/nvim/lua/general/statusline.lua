@@ -1,6 +1,9 @@
--- Status autocommands
--- Credit: u/HarmonicAscendant on reddit
------------------------------------------------------------------
+--  ╭──────────────────────────────────────────────────────────╮
+--  │                   Status autocommands                    │
+--  │          Credit: u/HarmonicAscendant on reddit           │
+--  ╰──────────────────────────────────────────────────────────╯
+--  TODO: Rewrite this at some point, its been so long since
+--  I have looked at this.
 local reset_group = vim.api.nvim_create_augroup('reset_group', {
   clear = false,
 })
@@ -47,7 +50,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'FocusGained' }, {
   end,
   group = init_group,
 })
------------------------------------------------------------------
 
 local function status_line()
   vim.cmd("hi ErrorNoUnderline gui=bold guifg=#EE6D85")
@@ -75,7 +77,9 @@ local function status_line()
   }
 end
 
--- Update statusline every second for clock
+--  ╭──────────────────────────────────────────────────────────╮
+--  │         Update statusline every second for clock         │
+--  ╰──────────────────────────────────────────────────────────╯
 vim.cmd [[call timer_start(1000, {-> execute(':let &stl=&stl')}, {'repeat': -1})]]
 
 vim.opt.laststatus = 3
