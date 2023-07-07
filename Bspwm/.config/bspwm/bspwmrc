@@ -7,15 +7,15 @@
 xrandr --output DP-5 --primary
 
 xsetroot -cursor_name left_ptr
-killall sxhkd picom dunst flameshot monderod bitcoin-qt
+killall sxhkd picom dunst flameshot
 setxkbmap -v us
 sxhkd &
 picom &
 dunst &
+gamemoded &
+/usr/lib/polkit-kde-authentication-agent-1 &
 flameshot &
-sudo monerod &
-bitcoin-qt -min &
-# $HOME/.config/eww/launch.sh &
+$HOME/.config/eww/launch.sh &
 
 #################################
 #            Monitors           #
