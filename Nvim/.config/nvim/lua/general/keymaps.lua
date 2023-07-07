@@ -74,7 +74,6 @@ keymap('n', '<leader>rn', ':IncRename ', opts)
 keymap('n', '<leader>d', vim.lsp.buf.type_definition, opts)
 keymap({ 'n', 'v' }, '<leader>ca', ':CodeActionMenu<cr>', opts)
 
-
 --  ╭──────────────────────────────────────────────────╮
 --  │  Visual Mode                                     │
 --  ╰──────────────────────────────────────────────────╯
@@ -82,7 +81,7 @@ keymap({ 'n', 'v' }, '<leader>ca', ':CodeActionMenu<cr>', opts)
 --  │ Search and replace │
 --  ╰────────────────────╯
 keymap({ 'n', 'v' }, '<leader>sw', ':s///g<left><left>')
-keymap('v', '<leader>f', '\"fy/\\V\\<<C-R>f\\><CR>')
+keymap('v', '<C-f>', '\"fy/\\V\\<<C-R>f\\><CR>')
 
 --  ╭────────────────────────────╮
 --  │ Indent keeps text selected │
@@ -121,11 +120,13 @@ keymap('n', '<Leader><Leader>', ':NvimTreeToggle<cr>', opts)
 --  ╰─────────────╯
 local ok, toggleterm = pcall(require, 'toggleterm.terminal')
 if ok then
-  local lazygit = require('toggleterm.terminal').Terminal:new({ direction = 'float', cmd = 'lazygit', hidden = true })
+  local lazygit = require('toggleterm.terminal').Terminal:new({
+    direction = 'float',
+    cmd = 'lazygit',
+    hidden = true
+  })
 
-  function _lazygit_toggle()
-    lazygit:toggle()
-  end
+  function _lazygit_toggle() lazygit:toggle() end
 end
 keymap('n', '<Leader>g', ':lua _lazygit_toggle()<cr>', opts)
 
@@ -134,8 +135,10 @@ keymap('n', '<Leader>g', ':lua _lazygit_toggle()<cr>', opts)
 --  ╰───────────╯
 keymap('n', '<Leader>s', ':Telescope live_grep<cr>', opts)
 keymap('n', '<Leader>ff', ':Telescope find_files<cr>', opts)
-keymap('n', '<Leader>ct', require("telescope").extensions.git_worktree.create_git_worktree) --Make new tree
-keymap('n', '<Leader>st', require("telescope").extensions.git_worktree.git_worktrees)       --switch/delete/view trees
+keymap('n', '<Leader>ct',
+  require("telescope").extensions.git_worktree.create_git_worktree)      -- Make new tree
+keymap('n', '<Leader>st',
+  require("telescope").extensions.git_worktree.git_worktrees)            -- switch/delete/view trees
 keymap('n', '<Leader>lsb', ':Telescope attempt<cr>', opts)
 
 --  ╭──────────────╮
@@ -166,7 +169,8 @@ keymap({ 'n', 'v' }, '<leader>pc', ':PP<cr>', opts)
 --  │ Scratch buffers │
 --  ╰─────────────────╯
 keymap('n', '<leader>nsb', require("attempt").new_select)
-keymap('n', '<leader>dsb', ':w<cr>:lua require("attempt").delete_buf()<cr>', opts)
+keymap('n', '<leader>dsb', ':w<cr>:lua require("attempt").delete_buf()<cr>',
+  opts)
 
 --  ╭──────────────────╮
 --  │ Nice screenshots │
@@ -210,7 +214,6 @@ keymap('n', '<leader>se', require("swenv.api").pick_venv)
 keymap('n', '<leader>as', require("treesj").split)
 keymap('n', '<leader>aj', require("treesj").join)
 
-
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                      Auto Commands                       │
 --  ╰──────────────────────────────────────────────────────────╯
@@ -223,7 +226,8 @@ vim.cmd('autocmd! InsertLeave * silent! ColorizerAttachToBuffer')
 --  ╭────────────────────────────────────╮
 --  │ Center first result when searching │
 --  ╰────────────────────────────────────╯
-vim.api.nvim_exec([[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>']],
+vim.api.nvim_exec(
+  [[cnoremap <silent><expr> <enter> index(['/', '?'], getcmdtype()) >= 0 ? '<enter>zz' : '<enter>']],
   false)
 
 --  ╭────────────────────────────────────────────╮
