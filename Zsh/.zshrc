@@ -23,7 +23,7 @@ zplug "zsh-users/zsh-completions"                   #More completions for zsh
 zplug "zsh-users/zsh-history-substring-search"      #Search prev commands via substr
 zplug "ChrisPenner/copy-pasta"                      #Allows copy and paste of files
 zplug "mdumitru/fancy-ctrl-z"                       #Enable ctrl z to toggle between two instances of terminal
-zplug "b4b4r07/enhanced", use:init.sh                #better cd
+zplug "b4b4r07/enhancd", use:init.sh                #better cd
 
 #  ╭─────────────────╮
 #  │ Install plugins │
