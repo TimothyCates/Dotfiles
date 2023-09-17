@@ -110,10 +110,10 @@ keymap('x', 'K', moveline.block_up)
 --  ╭──────────────────────────────────────────────────────────╮
 --  │                         Plugins                          │
 --  ╰──────────────────────────────────────────────────────────╯
---  ╭──────────────────╮
---  │  Toggle NvimTree │
---  ╰──────────────────╯
-keymap('n', '<Leader><Leader>', ':NvimTreeToggle<cr>', opts)
+--  ╭─────────────────────╮
+--  │  Open File Browser  │
+--  ╰─────────────────────╯
+keymap('n', '<Leader><Leader>', ':Telescope file_browser<cr>', opts)
 
 --  ╭─────────────╮
 --  │ Toggle Term │

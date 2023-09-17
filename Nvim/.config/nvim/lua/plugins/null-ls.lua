@@ -21,5 +21,5 @@ null_ls.setup {
     diagnostics.tsc,         -- Typescript compiler
 
     codeactions.gitsigns,    -- git code-actions
-  }
+  },
 }

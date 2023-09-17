@@ -37,12 +37,11 @@ vim.lsp.handlers["textDocument/hover"] =
 
 vim.lsp.handlers["textDocument/signatureHelp"] =
     vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-
+require'lspconfig'.gdscript.setup{}
 lsp_setup.setup({
   default_mappings = false,
   on_attach = function(client, bufnr)
     require("colorizer").attach_to_buffer()
-    require("lsp-setup.utils").format_on_save(client)
   end,
   capabilities = capabilities,
   servers = {
@@ -54,7 +53,7 @@ lsp_setup.setup({
     golangci_lint_ls = {},
     jdtls = {},
     lua_ls = {},
-    rust_analyzer = require("lsp-setup.rust-tools").setup({
+    rust_analyzer = require("rust-tools").setup({
       server = {
         ['rust-analyzer'] = {
           cargo = { loadOutDirsFromCheck = true },

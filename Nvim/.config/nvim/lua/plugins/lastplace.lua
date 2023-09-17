@@ -1,4 +1,4 @@
-local ok, lastplace = pcall(require, "lastplace")
+local ok, lastplace = pcall(require, "nvim-lastplace")
 if not ok then
   return
 end

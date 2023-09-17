@@ -1,222 +1,240 @@
--- Autoload dep
-local path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
-
-if vim.fn.empty(vim.fn.glob(path)) > 0 then
-    vim.fn.system({
-        "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", path
-    })
+--  ╭─────────────────────╮
+--  │ Auto Install Packer │
+--  ╰─────────────────────╯
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') ..
+                             '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({
+            'git', 'clone', '--depth', '1',
+            'https://github.com/wbthomason/packer.nvim', install_path
+        })
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
-vim.cmd("packadd dep")
+local packer_bootstrap = ensure_packer()
 
-require "dep" {
-    -- Completion
-    {
-        "hrsh7th/nvim-cmp",
+return require('packer').startup(function(use)
+    --  ╭───────────────────────╮
+    --  │ Packer manages Packer │
+    --  ╰───────────────────────╯
+    use {'wbthomason/packer.nvim'}
+
+    --  ╭─────────────────────╮
+    --  │   Completion Engine │
+    --  ╰─────────────────────╯
+    use {
+        'hrsh7th/nvim-cmp',
         requires = {
-            "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-nvim-lua",
-            "lukas-reineke/cmp-under-comparator", "ray-x/cmp-treesitter",
-            "lukas-reineke/cmp-rg", "l3mon4d3/LuaSnip",
-            "rafamadriz/friendly-snippets", "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-emoji", "kdheepak/cmp-latex-symbols",
-            "onsails/lspkind.nvim"
+            {"hrsh7th/cmp-nvim-lsp"}, {"hrsh7th/cmp-nvim-lsp-signature-help"},
+            {"hrsh7th/cmp-buffer"}, {"hrsh7th/cmp-path"},
+            {"hrsh7th/cmp-nvim-lua"}, {"lukas-reineke/cmp-under-comparator"},
+            {"ray-x/cmp-treesitter"}, {"lukas-reineke/cmp-rg"},
+            {"l3mon4d3/LuaSnip"}, {"rafamadriz/friendly-snippets"},
+            {"saadparwaiz1/cmp_luasnip"}, {"hrsh7th/cmp-emoji"},
+            {"kdheepak/cmp-latex-symbols"}, {"onsails/lspkind.nvim"}
         }
-    }, -- Editing
-    {"ziontee113/color-picker.nvim"}, {"jghauser/mkdir.nvim"},
-    {"rktjmp/paperplanes.nvim"},
-    {"saifulapm/chartoggle.nvim", requires = {"tiagovla/tokyodark.nvim"}}, {
+    }
+
+    --  ╭─────────╮
+    --  │ Editing │
+    --  ╰─────────╯
+    use {"ziontee113/color-picker.nvim"}
+    use {"jghauser/mkdir.nvim"}
+    use {"rktjmp/paperplanes.nvim"}
+    use {"saifulapm/chartoggle.nvim"}
+    use {
         "m-demare/attempt.nvim",
-        requires = {"nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim"},
-        function() require('attempt').setup(); end
-    }, {"nguyenvukhang/nvim-toggler"}, {"chrisgrieser/nvim-recorder"},
-    {"ThePrimeagen/harpoon", requires = {"nvim-lua/plenary.nvim"}}, {
+        requires = {
+            {"nvim-lua/plenary.nvim"}, {"nvim-telescope/telescope.nvim"}
+        },
+        config = function() require("attempt").setup() end
+    }
+    use {"nguyenvukhang/nvim-toggler"}
+    use {"chrisgrieser/nvim-recorder"}
+    use {"ThePrimeagen/harpoon", requires = {{"nvim-lua/plenary.nvim"}}}
+    use {
         "rmagatti/auto-session",
-        requires = {"nvim-tree/nvim-tree.lua"},
-        function()
-            require("auto-session").setup({
-                log_level = "error",
-                pre_save_cmds = {
-                    function()
-                        require("nvim-tree.api").tree.close()
-                    end
-                },
-                post_save_cmds = {
-                    function()
-                        require("nvim-tree.api").tree.toggle({focus = false})
-                    end
-                },
-                post_open_cmds = {
-                    function()
-                        require("nvim-tree.api").tree.toggle({focus = false})
-                    end
-                },
-                post_restore_cmds = {
-                    function()
-                        require("nvim-tree.api").tree.toggle({focus = false})
-                    end
-                }
-            })
-        end
-    }, {"echasnovski/mini.align", function() require("mini.align").setup() end},
-    {"numToStr/Comment.nvim", function() require("Comment").setup() end},
-    {"willothy/moveline.nvim", config = function() os.execute("make") end},
-    {"ethanholz/nvim-lastplace"},
-    {"akinsho/toggleterm.nvim", requires = {"tiagovla/tokyodark.nvim"}},
-    {"CRAG666/code_runner.nvim", requires = {"nvim-lua/plenary.nvim"}},
-    {"elkowar/yuck.vim", requires = {"gpanders/nvim-parinfer"}},
-    {"tpope/vim-sleuth"}, {"machakann/vim-sandwich"}, {
+        config = function() require("auto-session").setup() end
+    }
+    use {
+        "echasnovski/mini.align",
+        config = function() require("mini.align").setup() end 
+    }
+    use {
+        "numToStr/Comment.nvim",
+        config = function() require("Comment").setup() end
+    }
+    use {"willothy/moveline.nvim", run = 'make'}
+    use {"ethanholz/nvim-lastplace"}
+    use {"akinsho/toggleterm.nvim"}
+    use {"CRAG666/code_runner.nvim", requires = {{"nvim-lua/plenary.nvim"}}}
+    use {"elkowar/yuck.vim", requires = {{"gpanders/nvim-parinfer"}}}
+    use {"habamax/vim-godot"}
+    use {"tpope/vim-sleuth"}
+    use {"machakann/vim-sandwich"}
+    use {
         "nvim-telescope/telescope.nvim",
-        deps = {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            "chip/telescope-software-licenses.nvim"
+        requires = {
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+            }, {"chip/telescope-software-licenses.nvim"}
         }
-    }, {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        config = function()
-            os.execute(
-                "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build")
-        end
-    },
-    {"smjonas/inc-rename.nvim", function() require("inc_rename").setup() end},
-    {
+    }
+    use {
+        "smjonas/inc-rename.nvim",
+        config = function() require("inc_rename").setup() end
+    }
+    use {
         "ojroques/nvim-lspfuzzy",
-        requires = {"junegunn/fzf", "junegunn/fzf.vim"},
-        function() require("lspfuzzy").setup() end
-    }, {"folke/trouble.nvim"}, {
+        requires = {{"junegunn/fzf"}, {"junegunn/fzf.vim"}},
+        config = function() require("lspfuzzy").setup() end
+    }
+    use {"folke/trouble.nvim"}
+    use {
         "simrat39/symbols-outline.nvim",
-        function() require("symbols-outline").setup() end
-    }, {"ThePrimeagen/git-worktree.nvim"}, {"moll/vim-bbye"},
-    {"mbbill/undotree"}, -- LSP
-    {
-        "mfussenegger/nvim-dap",
-        deps = {
-            "rcarriga/nvim-dap-ui", "Weissle/persistent-breakpoints.nvim",
-            "ofirgall/goto-breakpoints.nvim"
-        }
-    }, {
+        config = function() require("symbols-outline").setup() end
+    }
+    use {"ThePrimeagen/git-worktree.nvim"}
+    use {"moll/vim-bbye"}
+    use {"mbbill/undotree"}
+
+    --  ╭─────╮
+    --  │ LSP │
+    --  ╰─────╯
+    use {
         "rcarriga/nvim-dap-ui",
         requires = {
-            "Weissle/persistent-breakpoints.nvim",
-            "ofirgall/goto-breakpoints.nvim"
+            {"mfussenegger/nvim-dap"}, {"Weissle/persistent-breakpoints.nvim"},
+            {"ofirgall/goto-breakpoints.nvim"}
         },
-        function()
+        config = function()
             require("dapui").setup()
-            require('persistent-breakpoints').setup()
+            require("persistent-breakpoints").setup()
         end
-    }, {
-        "j-hui/fidget.nvim", function()
-            require("fidget").setup({window = {relative = "editor", blend = 0}})
-        end
-    },
-    {"jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim"}},
-    {"weilbith/nvim-code-action-menu"},
-    {"neovim/nvim-lspconfig", deps = {"rmagatti/goto-preview"}},
-    {"rmagatti/goto-preview", function() require("goto-preview").setup() end},
-    {
+    }
+    use {"j-hui/fidget.nvim"}
+    use {
+        "jose-elias-alvarez/null-ls.nvim",
+        requires = {{"nvim-lua/plenary.nvim"}}
+    }
+    use {"weilbith/nvim-code-action-menu"}
+    use {
+        "rmagatti/goto-preview",
+        requires = {{"neovim/nvim-lspconfig"}},
+        config = function() require("goto-preview").setup() end
+    }
+    use {
         "junnplus/lsp-setup.nvim",
         requires = {
-            "neovim/nvim-lspconfig", "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim"
+            {"neovim/nvim-lspconfig"}, {"williamboman/mason.nvim"},
+            {"williamboman/mason-lspconfig.nvim"}
         }
-    }, {"VidocqH/lsp-lens.nvim", function() require("lsp-lens").setup() end},
+    }
+    use {
+        "Vidocqh/lsp-lens.nvim",
+        config = function() require("lsp-lens").setup() end
+    }
 
-    -- Tree-sitter
-    {
-        "Wansmer/treesj",
-        requires = {"nvim-treesitter/nvim-treesitter"},
-        function()
-            require("treesj").setup({
-                use_default_keymaps = false,
-                check_syntax_errors = false,
-                max_join_length = 1000
-            })
-        end
-    },
-    {"HiPhish/nvim-ts-rainbow2", requires = {"nvim-treesitter/nvim-treesitter"}},
-    {
+    --  ╭──────────────╮
+    --  │   Treesitter │
+    --  ╰──────────────╯
+    use {"wansmer/treesj", requires = {{"nvim-treesitter/nvim-treesitter"}}}
+    use {
+        "HiPhish/nvim-ts-rainbow2",
+        requires = {{"nvim-treesitter/nvim-treesitter"}}
+    }
+    use {
         "JoosepAlviste/nvim-ts-context-commentstring",
-        requires = {"nvim-treesitter/nvim-treesitter"}
-    }, {"windwp/nvim-ts-autotag"},
-    {"windwp/nvim-autopairs", function() require("nvim-autopairs").setup() end},
-    {
+        requires = {{"nvim-treesitter/nvim-treesitter"}}
+    }
+    use {"windwp/nvim-ts-autotag"}
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup() end
+    }
+    use {
         "iamcco/markdown-preview.nvim",
-        config = function() vim.fn["mkdp#util#install"]() end
-    }, {"AckslD/swenv.nvim", function() require("swenv").setup() end}, {
+        run = function() vim.fn["mkdp#util#install"]() end
+    }
+    use {"AckslD/swenv.nvim", config = function() require("swenv").setup() end}
+    use {
         "simrat39/rust-tools.nvim",
         requires = {
-            "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap",
-            "neovim/nvim-lspconfig"
+            {"nvim-lua/plenary.nvim"}, {"mfussenegger/nvim-dap"},
+            {"neovim/nvim-lspconfig"}
         }
-    }, {"romainl/vim-cool"}, {
+    }
+    use {"romainl/vim-cool"}
+    use {
         "RRethy/nvim-treesitter-textsubjects",
-        requires = {"nvim-treesitter/nvim-treesitter"}
-    }, {
-        "nvim-treesitter/nvim-treesitter", function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "c", "lua", "javascript", "rust", "comment", "cpp", "css",
-                    "dot", "gitignore", "go", "java", "json", "typescript",
-                    "yuck"
-                },
-                auto_install = true
-            })
-        end
-    }, -- Visual
-    {
-        "kristijanhusak/vim-carbon-now-sh", function()
-            vim.g.carbon_now_sh_options = {
-                bg = "rgba%28171%2C184%2C195%2C0%29&t=theme%253Aaykdntjt4md",
-                wt = "boxy",
-                ln = "false",
-                ds = "true",
-                dsyoff = "20px",
-                dsblur = "68px",
-                wc = "true",
-                wa = "true",
-                pv = "56px",
-                ph = "56px",
-                fl = "1",
-                fm = "JetBrains+Mono",
-                fs = "14px",
-                lh = "200%25",
-                si = "false",
-                es = "2x",
-                wm = "false"
-            }
-        end
-    }, {"nvim-tree/nvim-tree.lua", requires = {"nvim-tree/nvim-web-devicons"}},
-    {
+        requires = {{"nvim-treesitter/nvim-treesitter"}}
+    }
+    use {"nvim-treesitter/nvim-treesitter"}
+
+    --  ╭──────────╮
+    --  │   Visual │
+    --  ╰──────────╯
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = {
+            {"nvim-telescope/telescope.nvim"}, {"nvim-lua/plenary.nvim"},
+            {"nvim-tree/nvim-web-devicons"}
+        }
+    }
+    use {
         "stevearc/dressing.nvim",
         requires = {
-            "nvim-telescope/telescope.nvim", "ziontee113/icon-picker.nvim"
+            {"nvim-telescope/telescope.nvim"}, {"ziontee113/icon-picker.nvim"}
         }
-    }, {"lukas-reineke/indent-blankline.nvim"}, {
+    }
+    use {"lukas-reineke/indent-blankline.nvim"}
+    use {
         "folke/todo-comments.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
-        function() require("todo-comments").setup() end
-    }, {"LudoPinelli/comment-box.nvim"},
-    {"utilyre/sentiment.nvim", function() require("sentiment").setup() end},
-    {"RRethy/vim-illuminate"}, {
+        requires = {{"nvim-lua/plenary.nvim"}},
+        config = function() require("todo-comments").setup() end
+    }
+    use {"LudoPinelli/comment-box.nvim"}
+    use({
+        "utilyre/sentiment.nvim",
+        tag = "*",
+        config = function() require("sentiment").setup() end
+    })
+    use {"RRethy/vim-illuminate"}
+    use {
         "mawkler/modicator.nvim",
-        requires = {"tiagovla/tokyodark.nvim"},
-        function() require("modicator").setup() end
-    }, {"NvChad/nvim-colorizer.lua"}, {"lewis6991/gitsigns.nvim"},
-    {"rcarriga/nvim-notify", requires = {"tiagovla/tokyodark.nvim"}}, {
-        "tiagovla/tokyodark.nvim", function()
-            vim.g.tokyodark_transparent_background = true
-            vim.g.tokyodark_enable_italic_comment = true
-            vim.g.tokyodark_enable_italic = true
-            vim.g.tokyodark_color_gamma = "1.0"
-            vim.cmd("colorscheme tokyodark")
-        end
-    }, {
+        config = function() require("modicator").setup() end
+    }
+    use {"NvChad/nvim-colorizer.lua"}
+    use {"lewis6991/gitsigns.nvim"}
+    use {"rcarriga/nvim-notify"}
+    use {
+        "tiagovla/tokyodark.nvim"
+    }
+    use {
         "folke/noice.nvim",
-        requires = {"MunifTanjim/nui.nvim", "rcarriga/nvim-notify"},
-        function() require("noice").setup() end
-    }, {"akinsho/bufferline.nvim", requires = {"nvim-tree/nvim-web-devicons"}},
-    {
+        requires = {{"Muniftanjim/nui.nvim"}, {"tcarriga/nvim-notify"}},
+        config = function() require("noice").setup() end
+    }
+    use {
+        "akinsho/bufferline.nvim",
+        requires = {{"nvim-tree/nvim-web-devicons"}}
+    }
+    use {
         "utilyre/barbecue.nvim",
-        requires = {"SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons"}
-    }, {"m-demare/hlargs.nvim", requires = {"nvim-treesitter/nvim-treesitter"}}
-}
+        requires = {{"SmiteshP/nvim-navic"}, {"nvim-tree/nvim-web-devicons"}}
+    }
+    use {
+        "m-demare/hlargs.nvim",
+        requires = {{"nvim-treesitter/nvim-treesitter"}}
+    }
+    --  ╭─────────────────────────────────╮
+    --  │ Part of the packer bootstrapper │
+    --  ╰─────────────────────────────────╯
+    if packer_bootstrap then require('packer').sync() end
+end)

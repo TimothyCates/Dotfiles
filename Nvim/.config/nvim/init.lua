@@ -8,3 +8,4 @@ require 'general.keymaps'
 
 -- Loads init.lua inside respective folders
 require 'plugins'
+
