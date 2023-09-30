@@ -181,9 +181,8 @@ return require('packer').startup(function(use)
     --  │   Visual │
     --  ╰──────────╯
     use {
-        "nvim-telescope/telescope-file-browser.nvim",
+        "nvim-tree/nvim-tree.lua",
         requires = {
-            {"nvim-telescope/telescope.nvim"}, {"nvim-lua/plenary.nvim"},
             {"nvim-tree/nvim-web-devicons"}
         }
     }
@@ -215,11 +214,6 @@ return require('packer').startup(function(use)
     use {"rcarriga/nvim-notify"}
     use {
         "tiagovla/tokyodark.nvim"
-    }
-    use {
-        "folke/noice.nvim",
-        requires = {{"Muniftanjim/nui.nvim"}, {"tcarriga/nvim-notify"}},
-        config = function() require("noice").setup() end
     }
     use {
         "akinsho/bufferline.nvim",
