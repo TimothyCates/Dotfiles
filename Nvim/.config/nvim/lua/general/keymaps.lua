@@ -113,7 +113,7 @@ keymap('x', 'K', moveline.block_up)
 --  ╭─────────────────────╮
 --  │  Open File Browser  │
 --  ╰─────────────────────╯
-keymap('n', '<Leader><Leader>', ':Telescope file_browser<cr>', opts)
+keymap('n', '<Leader><Leader>', ':NvimTreeToggle<cr>', opts)
 
 --  ╭─────────────╮
 --  │ Toggle Term │
