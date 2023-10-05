@@ -110,6 +110,8 @@ alias gendb='yay -Y --gendb'
 alias bckMirrors='sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup'
 alias upMirrors='sudo systemctl start reflector.service &'
 
+alias snap='sudo snap'
+
 #  ╭──────────────────────────────────────────────────────────╮
 #  │                      Misc Settings                       │
 #  ╰──────────────────────────────────────────────────────────╯
