@@ -81,7 +81,7 @@ keymap({ 'n', 'v' }, '<leader>ca', ':CodeActionMenu<cr>', opts)
 --  │ Search and replace │
 --  ╰────────────────────╯
 keymap({ 'n', 'v' }, '<leader>sw', ':s///g<left><left>')
-keymap('v', '<C-f>', '\"fy/\\V\\<<C-R>f\\><CR>')
+keymap('v', '<C-f>', '\"fy/\\V\\<<C-R>f\\><CR>N')
 
 --  ╭────────────────────────────╮
 --  │ Indent keeps text selected │
