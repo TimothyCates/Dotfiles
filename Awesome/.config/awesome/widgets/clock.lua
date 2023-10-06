@@ -5,8 +5,10 @@ clock:set_font("Source Sans Pro 18")
 
 clock:connect_signal("mouse::enter", function()
     local w = mouse.current_wibox
-    old_cursor, old_wibox = w.cursor, w
-    w.cursor = "hand2"
+    if(w)then
+        old_cursor, old_wibox = w.cursor, w
+        w.cursor = "hand2"
+    end
 end)
 
 clock:connect_signal("mouse::leave", function()
