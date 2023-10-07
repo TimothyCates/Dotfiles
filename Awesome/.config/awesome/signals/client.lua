@@ -116,3 +116,13 @@ client.connect_signal("manage", function(c)
         awful.placement.centered(c,{honor_workarea=true})
     end
 end)
+
+-- Close floating discord on defocus so we can popup anywhere and close anytime
+client.connect_signal("unfocus", function(c)
+    if c.class == "discord" then
+        if c.floating then
+            c:kill()
+        end
+    end
+end)
+
