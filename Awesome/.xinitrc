@@ -46,9 +46,10 @@ gsettings set org.gnome.desktop.interface font-antialiasing "rgba"
 #################################
 
 numlockx &
-picom &
 /usr/lib/xdg-desktop-portal &
 /usr/lib/xdg-desktop-portal-gtk &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 gamemoded &
+picom &
+flameshot &
 exec awesome
