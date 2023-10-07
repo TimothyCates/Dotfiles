@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gears = require("gears")
 local config = require("config")
 local global = require("bindings").global
 local key = require("bindings.keys")
@@ -124,7 +125,7 @@ global.bindkey({
   modifiers = {key.super},
   key = "p",
   action = function()
-    awful.spawn.with_shell('rofi-rbw')
+    awful.spawn.with_shell('rofi-rbw --no-help -t password --clear-after 90')
   end,
   description = "Password Manager",
   group = "launcher"
@@ -150,3 +151,82 @@ global.bindkey({
   group = "launcher"
 })
 
+-- Previous Track
+global.bindkey({
+  modifiers = {},
+  key = "XF86AudioPrev",
+  action = function()
+    awful.spawn("playerctl previous")
+  end,
+  description = "previous track",
+  group = "media"
+})
+
+local can_playpause = true
+global.bindkey({
+  modifiers = {},
+  key = "XF86AudioPlay",
+  action = function()
+    if can_playpause then
+        awful.spawn("playerctl play-pause")
+        can_playpause = false
+        -- Reset the flag after 0.5 seconds
+        gears.timer.start_new(0.2, function()
+            can_playpause = true
+        end)
+    end
+  end,
+  description = "toggle play",
+  group = "media"
+})
+
+-- Next Track
+global.bindkey({
+  modifiers = {},
+  key = "XF86AudioNext",
+  action = function()
+    awful.spawn("playerctl next")
+  end,
+  description = "next track",
+  group = "media"
+})
+
+local can_mute = true
+-- Mute Audio
+global.bindkey({
+  modifiers = {},
+  key = "XF86AudioMute",
+  action = function()
+    if can_mute then
+        awful.spawn("amixer -q set Master toggle")
+        can_mute = false
+        -- Reset the flag after 0.5 seconds
+        gears.timer.start_new(0.2, function()
+            can_mute = true
+        end)
+    end
+  end,
+  description = "toggle mute",
+  group = "media"
+})
+-- Volume Up
+global.bindkey({
+  modifiers = {},
+  key = "XF86AudioRaiseVolume",
+  action = function()
+    awful.spawn("amixer -q set Master 5%+ unmute")
+  end,
+  description = "volume up",
+  group = "media"
+})
+
+-- Volume Down
+global.bindkey({
+  modifiers = {},
+  key = "XF86AudioLowerVolume",
+  action = function()
+    awful.spawn("amixer -q set Master 5%- unmute")
+  end,
+  description = "volume down",
+  group = "media"
+})
