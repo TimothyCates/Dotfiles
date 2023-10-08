@@ -163,7 +163,6 @@ local function worker(user_args)
 
     local mixer_cmd = args.mixer_cmd or 'pavucontrol'
     local widget_type = args.widget_type
-    local refresh_rate = args.refresh_rate or 0.2
     local step = args.step or 5
     local device = args.device or 'pulse'
 
@@ -174,25 +173,29 @@ local function worker(user_args)
     end
 
     local function update_graphic(widget, stdout)
-        local mute = string.match(stdout, "%[(o%D%D?)%]")   -- \[(o\D\D?)\] - [on] or [off]
+        local mute = string.match(stdout, "%[(o%D%D?)%]")
         if mute == 'off' then widget:mute()
         elseif mute == 'on' then widget:unmute()
         end
-        local volume_level = string.match(stdout, "(%d?%d?%d)%%") -- (\d?\d?\d)\%)
+        local volume_level = string.match(stdout, "(%d?%d?%d)%%")
         volume_level = string.format("% 3d", volume_level)
         widget:set_volume_level(volume_level)
     end
 
+    local this_widget = volume.widget
+
     function volume:inc(s)
-        spawn.easy_async(INC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(volume.widget, stdout) end)
+        awesome.emit_signal("volume::change")
+        spawn.easy_async(INC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(this_widget, stdout) end)
     end
 
     function volume:dec(s)
-        spawn.easy_async(DEC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(volume.widget, stdout) end)
+        awesome.emit_signal("volume::change")
+        spawn.easy_async(DEC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(this_widget, stdout) end)
     end
 
     function volume:toggle()
-        spawn.easy_async(TOG_VOLUME_CMD(device), function(stdout) update_graphic(volume.widget, stdout) end)
+        spawn.easy_async(TOG_VOLUME_CMD(device), function(stdout) update_graphic(this_widget, stdout) end)
     end
 
     function volume:mixer()
@@ -217,7 +220,14 @@ local function worker(user_args)
             )
     )
 
-    watch(GET_VOLUME_CMD(device), refresh_rate, update_graphic, volume.widget)
+    awful.spawn.easy_async(GET_VOLUME_CMD(device), function(stdout)
+        update_graphic(this_widget, stdout)
+    end)
+    awesome.connect_signal("volume::change", function(m)
+        awful.spawn.easy_async(GET_VOLUME_CMD(device), function(stdout)
+            update_graphic(this_widget, stdout)
+        end)
+    end)
 
     client.connect_signal("button::press", function(c)
         if popup.visible then

@@ -55,7 +55,6 @@ local addToScreen = function(screen)
       bg_color = beautiful.border_normal,
       icon_dir = "~/.config/awesome/widgets/turtleWidgets/volume/icons/",
       with_icon = true,
-      refresh_rate = 0.05
     }),
     systray.systray,
     systray.sysWidget(screen),

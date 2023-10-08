@@ -215,6 +215,7 @@ global.bindkey({
   key = "XF86AudioRaiseVolume",
   action = function()
     awful.spawn("amixer -q set Master 5%+ unmute")
+    awesome.emit_signal("volume::change")
   end,
   description = "volume up",
   group = "media"
@@ -226,6 +227,7 @@ global.bindkey({
   key = "XF86AudioLowerVolume",
   action = function()
     awful.spawn("amixer -q set Master 5%- unmute")
+    awesome.emit_signal("volume::change")
   end,
   description = "volume down",
   group = "media"
