@@ -43,6 +43,14 @@ return require('packer').startup(function(use)
     --  ╭─────────╮
     --  │ Editing │
     --  ╰─────────╯
+    use({"aserowy/tmux.nvim",
+        config = function() return require("tmux").setup({
+            copy_sync = {
+                enable = false,
+                redirect_to_clipboard = true,
+            }
+        }) end
+    })
     use {"ziontee113/color-picker.nvim"}
     use {"jghauser/mkdir.nvim"}
     use {"rktjmp/paperplanes.nvim"}
