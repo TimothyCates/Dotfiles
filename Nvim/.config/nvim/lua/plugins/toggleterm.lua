@@ -6,7 +6,7 @@ local colors = require("tokyodark.palette")
 
 toggleterm.setup({
   size = 10,
-  open_mapping = [[<C-\>]],
+  open_mapping = null,
   hide_numbers = true,
   shade_terminals = false,
   shading_factor = '-30',
