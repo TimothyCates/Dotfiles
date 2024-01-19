@@ -24,6 +24,7 @@ zplug "zsh-users/zsh-history-substring-search"      #Search prev commands via su
 zplug "ChrisPenner/copy-pasta"                      #Allows copy and paste of files
 zplug "mdumitru/fancy-ctrl-z"                       #Enable ctrl z to toggle between two instances of terminal
 zplug "b4b4r07/enhancd", use:init.sh                #better cd
+zplug "jeffreytse/zsh-vi-mode"                      #Vi Mode
 
 #  ╭─────────────────╮
 #  │ Install plugins │
@@ -124,3 +125,9 @@ typeset -g ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 PROMPT='%F{blue}%2~ %F{green}> '
 RPROMPT="%F{#acb0d0}%t"
+
+# opam configuration
+[[ ! -r /home/Tim/.opam/opam-init/init.zsh ]] || source /home/Tim/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+path+=('/home/Tim/.local/bin')
+export PATH
