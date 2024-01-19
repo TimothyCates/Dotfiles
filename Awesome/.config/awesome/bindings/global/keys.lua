@@ -36,18 +36,56 @@ global.bindkey({
 -- Window navigation
 global.bindkey({
   modifiers = { key.super },
-  key = "h",
-  action = awful.client.focus.byidx(1),
-  description = "go to next window in layout",
+  key = "j",
+  action = function()
+    awful.client.focus.bydirection("down")
+    if client.focus then
+      client.focus:raise()
+    end
+  end,
+  description = "go to window below",
   group = "client"
 })
+
+global.bindkey({
+  modifiers = { key.super },
+  key = "k",
+  action = function()
+    awful.client.focus.bydirection("up")
+    if client.focus then
+      client.focus:raise()
+    end
+  end,
+  description = "go to window below",
+  group = "client"
+})
+
+global.bindkey({
+  modifiers = { key.super },
+  key = "h",
+  action = function()
+    awful.client.focus.bydirection("left")
+    if client.focus then
+      client.focus:raise()
+    end
+  end,
+  description = "go to window below",
+  group = "client"
+})
+
 global.bindkey({
   modifiers = { key.super },
   key = "l",
-  action = awful.client.focus.byidx(-1),
-  description = "go to previous window in layout",
+  action = function()
+    awful.client.focus.bydirection("right")
+    if client.focus then
+      client.focus:raise()
+    end
+  end,
+  description = "go to window below",
   group = "client"
 })
+
 global.bindkey({
   modifiers = { key.super },
   key = key.tab,
