@@ -147,7 +147,7 @@ keymap('n', '<Leader>lsb', ':Telescope attempt<cr>', opts)
 keymap('n', 'gpd', require('goto-preview').goto_preview_definition, opts)
 keymap('n', 'gpt', require('goto-preview').goto_preview_type_definition, opts)
 keymap('n', 'gpi', require('goto-preview').goto_preview_implementation, opts)
-keymap('n', 'gP', require('goto-preview').close_all_win, opts)
+keymap('n', 'gpc', require('goto-preview').close_all_win, opts)
 keymap('n', 'gpr', require('goto-preview').goto_preview_references, opts)
 
 --  ╭──────────────╮

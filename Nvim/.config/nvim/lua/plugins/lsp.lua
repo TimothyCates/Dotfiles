@@ -1,69 +1,64 @@
-local ok, lsp_setup = pcall(require, "lsp-setup")
-if not ok then return end
+return {
+  {"weilbith/nvim-code-action-menu"},
+  {
+    "rmagatti/goto-preview",
+    dependencies = "neovim/nvim-lspconfig",
+    config = true
+  },
+  {
+    "Vidocqh/lsp-lens.nvim",
+    config = true
+  },
+  {
+    "ojroques/nvim-lspfuzzy",
+    dependencies = {"junegunn/fzf", "junegunn/fzf.vim"},
+    main = "lspfuzzy",
+    config = true
+  },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim"
+    },
+    config = function()
+        local lspconfig = require("lspconfig")
+        require("mason").setup()
+        require("mason-lspconfig").setup({
+            ensure_installed = {
+                "asm_ls", "bashls", "clangd", "csharp_ls", "cmake", "cssls",
+                "dockerls", "eslint", "emmet_language_server", "gopls", "html",
+                "jsonls", "java_language_server", "tsserver", "ltex", "lua_ls",
+                "marsksman", "ocamllsp", "prismals", "pyright", "rust_analyzer",
+                "sqlls", "svelte", "tailwindcss", "yamlls", "zls"
+            },
+        })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities();
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn",  text = "" },
-  { name = "DiagnosticSignHint",  text = "כֿ" },
-  { name = "DiagnosticSignInfo",  text = "" }
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name,
-    { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
-local config = {
-  virtual_text = false,
-  signs = { active = signs },
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = false,
-    style = "minimal",
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = ""
-  }
-}
-
-vim.diagnostic.config(config)
-
-vim.lsp.handlers["textDocument/hover"] =
-    vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-require'lspconfig'.gdscript.setup{}
-lsp_setup.setup({
-  default_mappings = false,
-  on_attach = function(client, bufnr)
-    require("colorizer").attach_to_buffer()
-  end,
-  capabilities = capabilities,
-  servers = {
-    asm_lsp = {},
-    clangd = {},
-    cmake = {},
-    cssls = {},
-    eslint = {},
-    golangci_lint_ls = {},
-    jdtls = {},
-    lua_ls = {},
-    rust_analyzer = require("rust-tools").setup({
-      server = {
-        ['rust-analyzer'] = {
-          cargo = { loadOutDirsFromCheck = true },
-          procMacro = { enable = true }
+        local signs = {
+          { name = "DiagnosticSignError", text = "" },
+          { name = "DiagnosticSignWarn",  text = "" },
+          { name = "DiagnosticSignHint",  text = "" },
+          { name = "DiagnosticSignInfo",  text = "" }
         }
-      }
-    }),
-    tsserver = {},
-    prismals = {},
-    pyre = {},
-    tailwindcss = {}
-  }
-})
+
+        for _, sign in ipairs(signs) do
+          vim.fn.sign_define(sign.name,
+            { texthl = sign.name, text = sign.text, numhl = "" })
+        end
+
+        vim.diagnostic.config({
+            signs = { active = signs },
+            underline = true,
+            virtual_text = true,
+            update_in_insert = true,
+            severity_sort = true,
+        })
+
+
+        lspconfig.lua_ls.setup({
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer = 0})
+        })
+        --require("lsp-setup")
+    end,
+  },
+}
